@@ -3,6 +3,8 @@ package principal;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,13 +18,14 @@ public class Interfaz extends javax.swing.JFrame {
     int[] puntosY;
     
     Graphics g;
-    int maxPuntos,k;
+    int maxPuntos;
     Puntos auxiliar;
     int primera=0;
     ArrayList<Integer> numerosGuardadosX = new ArrayList<Integer>();
     ArrayList<Integer> numerosGuardadosY = new ArrayList<Integer>();
-    
+    ArrayList<cluster> graficar= new ArrayList<>();
     ArrayList<cluster> clusteres= new ArrayList<>();
+    int numero=0;
     
     JPanel aux;
     public Interfaz() {
@@ -40,11 +43,13 @@ public class Interfaz extends javax.swing.JFrame {
         btn_generar = new javax.swing.JButton();
         btn_inicio = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
+        lb_k = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelPrincipal.setBackground(new java.awt.Color(255, 255, 204));
-        panelPrincipal.setPreferredSize(new java.awt.Dimension(500, 500));
+        panelPrincipal.setMaximumSize(new java.awt.Dimension(650, 800));
+        panelPrincipal.setPreferredSize(new java.awt.Dimension(650, 800));
         panelPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelPrincipalMouseClicked(evt);
@@ -55,11 +60,11 @@ public class Interfaz extends javax.swing.JFrame {
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 204));
@@ -96,27 +101,26 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        lb_k.setText("K=0");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(sp_puntos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_generar)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(84, 84, 84))))
+                        .addComponent(btn_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(sp_puntos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_generar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lb_k)))
                 .addGap(16, 16, 16))
         );
         jPanel2Layout.setVerticalGroup(
@@ -129,10 +133,12 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(sp_puntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_generar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lb_k)
+                .addGap(33, 33, 33)
                 .addComponent(btn_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(312, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,20 +146,20 @@ public class Interfaz extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -209,14 +215,20 @@ public class Interfaz extends javax.swing.JFrame {
         g.fillOval(panelPrincipal.getMousePosition().x, panelPrincipal.getMousePosition().y,10, 10);
         Color col= new Color((int)(Math.random()*255+0),(int)(Math.random()*255+0),(int)(Math.random()*255+0));
         cluster c= new cluster(posx,posy, col);
+        c.puntosInicialesX=posx;
+        c.puntosIncialesY=posy;
+        numero++;
+        c.noCluster=numero;
+        
         clusteres.add(c);
+        lb_k.setText("K = "+clusteres.size());
         
            
     }//GEN-LAST:event_panelPrincipalMouseClicked
 
     private void btn_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inicioActionPerformed
         boolean terminar= false;
-        if(puntosX==null || puntosY==null || clusteres== null){
+        if(puntosX.length==0 || puntosY.length==0 || clusteres.size()==0  || numerosGuardadosX.size()==0|| numerosGuardadosY.size()==0){
             JOptionPane.showMessageDialog(null, "Primero genere los puntos");
         }else{
             do {                
@@ -253,18 +265,22 @@ public class Interfaz extends javax.swing.JFrame {
             Redibujar(new Color(255,255,204));
             numerosGuardadosX.clear();
             numerosGuardadosY.clear();
-            for(int i=0; i<clusteres.size();i++){
-                for(int j=0;j<clusteres.get(i).puntosX.size();j++){
-                    g.setColor(clusteres.get(i).col);
-                    g.fillOval(clusteres.get(i).puntosX.get(j), clusteres.get(i).puntosY.get(j), 10, 10);
+            
+            graficar=clusteres;
+            
+            for(int i=0; i<graficar.size();i++){
+                for(int j=0;j<graficar.get(i).puntosX.size();j++){
+                    g.setColor(graficar.get(i).col);
+                    g.fillOval(graficar.get(i).puntosX.get(j), graficar.get(i).puntosY.get(j), 10, 10);
                     
                 }
                 
                 numerosGuardadosX.add( clusteres.get(i).puntosx);
                 numerosGuardadosY.add( clusteres.get(i).puntosy);
                 clusteres.get(i).centroide();
-                clusteres.get(i).puntosX.clear();
-                clusteres.get(i).puntosY.clear();
+//                clusteres.get(i).puntosX.clear();
+//                clusteres.get(i).puntosY.clear();
+                
 
                 if(clusteres.get(i).puntosx==clusteres.get(i).puntoAnteriorX ||clusteres.get(i).puntosy==clusteres.get(i).puntoAnteriorY){
                     clusteres.get(i).igual=true;
@@ -274,12 +290,17 @@ public class Interfaz extends javax.swing.JFrame {
                     igual.add(false);
                 }
             }
-                Redibujar(Color.red);
+            //graficar.clear();
+            Redibujar(Color.red);
             for (boolean valor : igual) {
                 //System.out.println(valor);
                 if (valor==false) {
                     terminar = false;
-                   
+                    for(int i=0;i<clusteres.size();i++){
+                        clusteres.get(i).puntosX.clear();
+                        clusteres.get(i).puntosY.clear();
+                    }
+                  
                     break;
                 }else{
                     terminar= true;
@@ -288,6 +309,23 @@ public class Interfaz extends javax.swing.JFrame {
             }   
             System.out.println(terminar);
             } while (terminar==false);
+            JOptionPane.showMessageDialog(null, "El proceso ha terminado excitosamente");
+            
+            String rutaArchivo = "archivo.txt";
+            for(int i=0;i<clusteres.size();i++){
+                 try {
+           
+                    FileWriter escritor = new FileWriter(rutaArchivo);
+
+
+                    escritor.write(clusteres.toString());
+                    escritor.close();
+
+                    System.out.println("Se ha escrito en el archivo correctamente.");
+                } catch (IOException e) {
+                System.out.println("Ocurrió un error al escribir en el archivo: " + e.getMessage());
+                }
+            }
         }
     }//GEN-LAST:event_btn_inicioActionPerformed
     public void limpiar() {
@@ -299,6 +337,7 @@ public class Interfaz extends javax.swing.JFrame {
         numerosGuardadosX.clear();
         numerosGuardadosY.clear();
         clusteres.clear();
+        lb_k.setText("K=0");
         
     }
     public void Redibujar(Color c){
@@ -350,6 +389,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btn_limpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lb_k;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JSpinner sp_puntos;
     // End of variables declaration//GEN-END:variables

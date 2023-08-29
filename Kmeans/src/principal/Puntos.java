@@ -20,8 +20,9 @@ public class Puntos extends Thread {
     public void generarPuntos(){
         
         for(int i=0;i<numPuntos;i++){
-            puntosx[i]=(int)(Math.random()*500+0);
-            puntosy[i]=(int)(Math.random()*500+0);
+            
+            puntosx[i]=(int)(Math.random()*1000+0);
+            puntosy[i]=(int)(Math.random()*650+0);
         }
     }
     public void borrarPuntos(){
