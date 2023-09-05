@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.math.plot.Plot3DPanel;
 
-public class cluster extends Thread{
+public class cluster implements Runnable{
     double puntosInicialesX;
     double puntosIncialesY;
     double puntosIncialesZ;
@@ -27,11 +27,17 @@ public class cluster extends Thread{
     ArrayList<Double> puntosX= new ArrayList<>();
     ArrayList<Double> puntosY= new ArrayList<>();
     ArrayList<Double> puntosZ= new ArrayList<>();
-    
+    double rangoInferiorx;
+    double rangoInferiory;
+    double rangoInferiorz;
+    double rangoSuperiorx;
+    double rangoSuperiory;
+    double rangoSuperiorz;
      Plot3DPanel plot;
     cluster( Plot3DPanel p,double px, double py,double pz,Color c){
         puntosx=px;
         puntosy=py;
+        puntosz=pz;
         col=c;
         plot=p;
     }
@@ -39,10 +45,16 @@ public class cluster extends Thread{
         puntoAnteriorX= puntosx;
         puntoAnteriorY=puntosy;
         puntoAnteriorZ=puntosz;
-        
-        puntosx=promedio(puntosX);
-        puntosy=promedio(puntosY);
-        puntosz=promedio(puntosZ);
+        if(puntosX.isEmpty()||puntosY.isEmpty()||puntosZ.isEmpty()){
+            puntosx=(Math.random()*rangoSuperiorx+rangoInferiorx);
+            puntosy=(Math.random()*rangoSuperiory+rangoInferiory);
+            puntosz=(Math.random()*rangoSuperiorz+rangoInferiorz);
+        }else{
+              puntosx=promedio(puntosX);
+            puntosy=promedio(puntosY);
+            puntosz=promedio(puntosZ);
+        }
+      
     }
     public double promedio(ArrayList<Double> n){
         double promedio=0;
@@ -57,10 +69,23 @@ public class cluster extends Thread{
         int j=0;
         for(int i=0;i<puntosX.size();i++){
             j++;
-            cad+="\nPunto Numero "+j+"("+puntosX.get(i)+","+puntosY.get(i)+","+puntosY.get(i)+")";
+            cad+="\nPunto Numero "+j+"("+puntosX.get(i)+","+puntosY.get(i)+","+puntosZ.get(i)+")";
         
         }
         return cad;
+    }
+    public void dibujar(){
+        
+        plot.addScatterPlot("Cluster"+noCluster, convertir(puntosX),convertir(puntosY),convertir(puntosZ));
+        plot.repaint();
+    }
+    
+      public static double[] convertir(ArrayList<Double> n){
+        double[]convertir= new double[n.size()];
+        for(int i=0;i<n.size();i++){
+            convertir[i]=n.get(i);
+        }
+    return convertir;
     }
      public void guardar(){
           
@@ -76,7 +101,14 @@ public class cluster extends Thread{
             
     }
     public void run(){
-        guardar();
+        if(puntosX.isEmpty() || puntosY.isEmpty()|| puntosZ.isEmpty()){
+           
+            System.out.print("El Cluster no"+noCluster+ " Esta muy lejos de los datos");
+        }else{
+            dibujar();
+            guardar();
+        }
+        
     }
     
     public String toString(){

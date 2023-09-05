@@ -14,7 +14,7 @@ public class LectorCSV {
     public void leer(){
         
         Path filepath = 
-                Paths.get("C:\\Users\\Diego\\Documents\\NetBeansProjects\\KNN_3d\\Iris_DB.csv");
+                Paths.get("C:\\Users\\Diego\\Documents\\NetBeansProjects\\KMEANS_3d\\Iris_DB.csv");
         try {
             BufferedReader br=Files.newBufferedReader(filepath);
             String linea;
@@ -29,6 +29,6 @@ public class LectorCSV {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println(datos);
+        //System.out.println(datos);
     }
 }

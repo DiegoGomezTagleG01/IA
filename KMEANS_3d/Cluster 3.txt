@@ -1,0 +1,14 @@
+
+Cluster No:3
+Punto inicial: (5.0,3.0,7.0)
+Punto Final: (7.3,3.0714285714285716,6.042857142857143)
+Puntos Clasificados: 7
+Color: java.awt.Color[r=120,g=29,b=132]
+ Puntos: 
+Punto Numero 1(7.1,3.0,5.9)
+Punto Numero 2(7.3,2.9,6.3)
+Punto Numero 3(7.2,3.6,6.1)
+Punto Numero 4(7.2,3.2,6.0)
+Punto Numero 5(7.2,3.0,5.8)
+Punto Numero 6(7.4,2.8,6.1)
+Punto Numero 7(7.7,3.0,6.1)

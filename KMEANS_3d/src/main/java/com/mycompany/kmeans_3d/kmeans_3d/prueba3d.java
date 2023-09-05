@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -23,21 +26,24 @@ public class prueba3d extends javax.swing.JFrame {
      * Creates new form prueba3d
      */
     Plot3DPanel plot = new Plot3DPanel();
+    
     JInternalFrame f= new JInternalFrame("Plot panel");
     double[] puntosx;
     double[] puntosy;
     double[] puntosz;
     
-    double[] Auxiliarpuntosx;
-    double[] Auxiliarpuntosy;
-    double[] Auxiliarpuntosz;
+    double[] Auxiliarpuntosx=null;
+    double[] Auxiliarpuntosy=null;
+    double[] Auxiliarpuntosz=null;
     
     ArrayList<Double> puntosxK= new ArrayList<>();
     ArrayList<Double> puntosyK= new ArrayList<>();
     ArrayList<Double> puntoszK= new ArrayList<>();
-    double[] x=new double[1];
-    double[] y=new double[1];
-    double[] z=new double[1];
+    
+  
+    double[] x;
+    double[] y;
+    double[] z;
     
     int k=0;
     double[] AuxiliarpuntosxK;
@@ -46,6 +52,7 @@ public class prueba3d extends javax.swing.JFrame {
     int nom=0;
     ArrayList<cluster> clusteres= new ArrayList<>();
     
+  
     
     public prueba3d() {
         initComponents();
@@ -147,27 +154,27 @@ public class prueba3d extends javax.swing.JFrame {
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btn_csv, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_borrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                            .addComponent(sp_puntos, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4))
-                                    .addComponent(jLabel1))
-                                .addGap(22, 22, 22)
-                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_x, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                    .addComponent(txt_y)
-                                    .addComponent(txt_z)
-                                    .addComponent(lb_k, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btn_generar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btn_csv, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_borrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                        .addComponent(sp_puntos, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelPrincipalLayout.createSequentialGroup()
+                            .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4))
+                                .addComponent(jLabel1))
+                            .addGap(22, 22, 22)
+                            .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txt_x, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                .addComponent(txt_y)
+                                .addComponent(txt_z)
+                                .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                    .addComponent(lb_k, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1))))
+                        .addComponent(btn_generar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,11 +190,12 @@ public class prueba3d extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jButton1))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_k)
-                .addGap(39, 39, 39)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_k)
+                    .addComponent(jButton1))
+                .addGap(35, 35, 35)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sp_puntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,7 +250,7 @@ public class prueba3d extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+        
         if(puntosx!=null ||puntosy!=null ||puntosz!=null){
            plot.removeAllPlots();
            Redibujar("puntos", Color.black, Auxiliarpuntosx, Auxiliarpuntosy, Auxiliarpuntosz);
@@ -261,9 +269,9 @@ public class prueba3d extends javax.swing.JFrame {
         c.puntosIncialesY=Double.parseDouble(txt_y.getText());
         c.puntosIncialesZ=Double.parseDouble(txt_z.getText());
         
-        c.puntosx=Double.parseDouble(txt_x.getText());
-        c.puntosy=Double.parseDouble(txt_y.getText());
-        c.puntosz=Double.parseDouble(txt_z.getText());
+        c.puntosx=(float)Double.parseDouble(txt_x.getText());
+        c.puntosy=(float)Double.parseDouble(txt_y.getText());
+        c.puntosz=(float)Double.parseDouble(txt_z.getText());
         c.noCluster=nom++;
         clusteres.add(c);
         
@@ -311,7 +319,7 @@ public class prueba3d extends javax.swing.JFrame {
         if(AuxiliarpuntosxK!=null ||AuxiliarpuntosyK!=null ||AuxiliarpuntoszK!=null){
            Redibujar("Kpuntos", Color.red,AuxiliarpuntosxK, AuxiliarpuntosyK, AuxiliarpuntoszK);
         }
-       
+        
         int numPuntos = (int) sp_puntos.getValue();
         puntosx= new double[numPuntos];
         puntosy= new double[numPuntos];
@@ -321,6 +329,7 @@ public class prueba3d extends javax.swing.JFrame {
             puntosy[i]=(Math.random()*50+0);
             puntosz[i]=(Math.random()*50+0);
         }
+
         plot.addScatterPlot("Puntos", Color.black, puntosx, puntosy, puntosz);
         plot.repaint();
         Auxiliarpuntosx=puntosx;
@@ -336,65 +345,74 @@ public class prueba3d extends javax.swing.JFrame {
 
     private void btn_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inicioActionPerformed
         boolean terminar= false;
-        if(x==null || y==null|| z==null || puntosxK==null || puntosyK ==null || puntoszK==null || puntosx==null|| puntosy==null|| puntosz==null ){
+        
+        if(x==null || y==null|| z==null || puntosxK.isEmpty() || puntosyK.isEmpty() || puntoszK.isEmpty() || 
+                puntosx==null|| puntosy==null|| puntosz==null || clusteres.isEmpty()){
             JOptionPane.showMessageDialog(null, "Primero genere los puntos");
         }else{
+            //asignamos los valores maximos y minimos del conjunto
+            for(int i=0;i<clusteres.size();i++){
+                clusteres.get(i).rangoInferiorx=Collections.min(Reconvertir(puntosx));
+                clusteres.get(i).rangoSuperiorx=Collections.max(Reconvertir(puntosx));
+                clusteres.get(i).rangoInferiory=Collections.min(Reconvertir(puntosy));
+                clusteres.get(i).rangoSuperiory=Collections.max(Reconvertir(puntosy));
+                clusteres.get(i).rangoInferiorz=Collections.min(Reconvertir(puntosz));
+                clusteres.get(i).rangoSuperiorz=Collections.max(Reconvertir(puntosz));
+            }
+           
             do {                
                for(int i=0;i<puntosx.length;i++){
                     ArrayList<Double> distancia= new ArrayList<>();
-                    
+                   //se mide la distancia del punto con los centroides
                     for(int j=0;j<clusteres.size();j++){              
                         double distanciaP= Math.sqrt(Math.pow(puntosx[i]-clusteres.get(j).puntosx, 2)+
                                 Math.pow(puntosy[i]-clusteres.get(j).puntosy, 2)+Math.pow(puntosz[i]-clusteres.get(j).puntosz, 2));
-                        //clusteres.get(j).distancias.add(distanciaP);
+                        //se guarda en un arrayList 
                         distancia.add(distanciaP);
                     }
-                
-                    double min = distancia.get(0);
+                    //busca el elemento mas con menor distancia
+                    double min= Collections.min(distancia);
                     int indice=0; 
                     
-                    for (int j = 1; j < distancia.size(); j++) {
-                        if (distancia.get(j) < min) {
-                            min = distancia.get(j);
-                            indice=j;
-                        }
+                    //busca su indice, pues corresponde al del cluster
+                    for (int j = 0; j < distancia.size(); j++) {
+                       if(min==distancia.get(j)){
+                           indice=j;
+                       }
                     }
+                    //asigna el punto actual con el cluster del indice 
                     clusteres.get(indice).puntosX.add(puntosx[i]);           
                     clusteres.get(indice).puntosY.add(puntosy[i]);
                     clusteres.get(indice).puntosZ.add(puntosz[i]);
                     //limpia el arrayList para evitar conflictos
                     distancia.clear();
                }
-               plot.removeAllPlots();
+               //actualiza el centroide con el promedio
+               for (int i=0;i<clusteres.size();i++){
+                   clusteres.get(i).centroide();
+               }
+               //crea un arreglo de booleanos
                ArrayList<Boolean> igual= new ArrayList<>();
-               ArrayList<Double> centroidesX= new ArrayList<>();
-               ArrayList<Double> centroidesY= new ArrayList<>();
-               ArrayList<Double> centroidesZ= new ArrayList<>();
-               
-               for(int j=0;j<clusteres.size();j++){
-                   Redibujar("Cluster no "+clusteres.get(j).noCluster,clusteres.get(j).col , convertir(clusteres.get(j).puntosX),
-                           convertir(clusteres.get(j).puntosY), convertir(clusteres.get(j).puntosZ));
-                   clusteres.get(j).centroide();
-                   centroidesX.add(clusteres.get(j).puntosx);
-                   centroidesY.add(clusteres.get(j).puntosy);
-                   centroidesZ.add(clusteres.get(j).puntosz);
-                   
-                }
-                Redibujar("Centroides", Color.red, convertir(centroidesX), convertir(centroidesY), convertir(centroidesZ));
+              
+                //comprueba si lso valores de los centroides son iguales al anterior
                 for(int j=0;j<clusteres.size();j++){
-                    if(clusteres.get(j).puntosx==clusteres.get(j).puntoAnteriorX 
-                           ||clusteres.get(j).puntosy==clusteres.get(j).puntoAnteriorY
-                           ||clusteres.get(j).puntosz==clusteres.get(j).puntoAnteriorZ ){
+                    if(Math.round(clusteres.get(j).puntosx)==Math.round(clusteres.get(j).puntoAnteriorX)
+                           && Math.round(clusteres.get(j).puntosy)== Math.round(clusteres.get(j).puntoAnteriorY)
+                           && Math.round(clusteres.get(j).puntosz)==Math.round(clusteres.get(j).puntoAnteriorZ) ){
                         clusteres.get(j).igual=true;
+                        //si son diferentes se agrega un true al arrayList
                         igual.add(true);
                     }else{
                         clusteres.get(j).igual=false;
+                        //si son iguales se agrega un false al arrayList
                         igual.add(false);
                     }
                 }
+                //busca si en el arrayList igual existe un valor false
                 for (boolean valor : igual) {
-                    //System.out.println(valor);
+                    
                     if (valor==false) {
+                        //si existe un valor false, se prepara todo para reiniciar el ciclo
                         terminar = false;
                         for(int i=0;i<clusteres.size();i++){
                             clusteres.get(i).puntosX.clear();
@@ -403,6 +421,7 @@ public class prueba3d extends javax.swing.JFrame {
                         }
                         break;
                     }else{
+                        //si no existe un valor false, entonces la variable terminar es igual a true para terminar el ciclo
                         terminar= true;
                     }
                
@@ -410,43 +429,68 @@ public class prueba3d extends javax.swing.JFrame {
                
             } while (terminar==false);
             JOptionPane.showMessageDialog(null, "El proceso ha terminado excitosamente");  
+            Thread t;
+            plot.removeAllPlots();
+            //dibuja los puntos con su nuevo cluster asignado
+            double[] clusteresx= new double[clusteres.size()];
+            double[] clusteresy= new double[clusteres.size()];
+            double[] clusteresz= new double[clusteres.size()];
             for(int i=0;i<clusteres.size();i++){
-                clusteres.get(i).start();
+                clusteresx[i]=clusteres.get(i).puntosx;
+                clusteresy[i]=clusteres.get(i).puntosy;
+                clusteresz[i]=clusteres.get(i).puntosz;
+                
+                try {
+                    t= new Thread(clusteres.get(i));
+                    t.start();
+                    t.join();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(prueba3d.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+            //redibuja los centroides
+            Redibujar("Centroides", Color.red, clusteresx, clusteresy, clusteresz);
             
         }
         
     }//GEN-LAST:event_btn_inicioActionPerformed
 
     private void btn_csvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_csvActionPerformed
+        limpiar();
+        plot.removeAllPlots();
+        if(AuxiliarpuntosxK!=null ||AuxiliarpuntosyK!=null ||AuxiliarpuntoszK!=null){
+           Redibujar("Kpuntos", Color.red,AuxiliarpuntosxK, AuxiliarpuntosyK, AuxiliarpuntoszK);
+        }
         LectorCSV l= new LectorCSV();
         l.leer();
-        int x=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el numero de rasgo para x(0-3)"));
-        int y=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el numero de rasgo para y(0-3)"));
-        int z=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el numero de rasgo para z(0-3)"));
+        //int x=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el numero de rasgo para x(0-3)"));
+        //int y=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el numero de rasgo para y(0-3)"));
+        //int z=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el numero de rasgo para z(0-3)"));
         ArrayList<Double> datosx= new ArrayList<>();
         ArrayList<Double> datosy= new ArrayList<>();
         ArrayList<Double> datosz= new ArrayList<>();
-        if(x!=y && x!=z && y!=z){
+        //if(x!=y && x!=z && y!=z){
             for(int i=1;i<l.datos.size();i++){
-            datosx.add(Double.parseDouble(l.datos.get(i).get(x)));
-            datosy.add(Double.parseDouble(l.datos.get(i).get(y)));
-            datosz.add(Double.parseDouble(l.datos.get(i).get(z)));
+                datosx.add(Double.valueOf(l.datos.get(i).get(0)));
+                datosy.add(Double.valueOf(l.datos.get(i).get(1)));
+                datosz.add(Double.valueOf(l.datos.get(i).get(2)));
             
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "intenta poner numeros diferentes");
-        }
-        
+        //}else{
+        //    JOptionPane.showMessageDialog(null, "intenta poner numeros diferentes");
+        //}
+       
         
         
         puntosx=convertir(datosx);
         puntosy=convertir(datosy);
         puntosz=convertir(datosz);
+        
+        plot.addScatterPlot("Puntos", Color.black, puntosx, puntosy, puntosz);
+        plot.repaint();
         Auxiliarpuntosx=puntosx;
         Auxiliarpuntosy=puntosy;
         Auxiliarpuntosz=puntosz;
-        Redibujar("Puntos CSV", Color.BLACK,puntosx, puntosy,puntosz);
         
     }//GEN-LAST:event_btn_csvActionPerformed
     public void limpiar(){
@@ -472,25 +516,22 @@ public class prueba3d extends javax.swing.JFrame {
         clusteres.clear();
     }
     public void Redibujar(String nombre,Color c,double[] x1, double[] y1,double[] z1){
-     
        plot.addScatterPlot(nombre, c, x1,y1,z1);
-       
        plot.repaint();
     }
-    public double[] convertir(ArrayList<Double> n){
+    public static double[] convertir(ArrayList<Double> n){
         double[]convertir= new double[n.size()];
         for(int i=0;i<n.size();i++){
             convertir[i]=n.get(i);
         }
     return convertir;
     }
-    public double[] aumentar(double[] n, double f){
-        double[]aumentar=new double[n.length+1];
-         for(int i=0;i<n.length;i++){
-            aumentar[i]=n[i];
+    public ArrayList<Double> Reconvertir(double[]n){
+        ArrayList<Double> convertir= new ArrayList<>();
+        for(int i=0;i<n.length;i++){
+            convertir.add(n[i]);
         }
-        aumentar[n.length+1]=f;
-        return aumentar;
+        return convertir;
     }
     /**
      * @param args the command line arguments
