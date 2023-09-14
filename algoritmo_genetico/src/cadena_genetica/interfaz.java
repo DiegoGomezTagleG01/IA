@@ -1,15 +1,21 @@
 
 package cadena_genetica;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class interfaz extends javax.swing.JFrame {
     String cadena;
     int noGeneracion=0;
+    ArrayList<individuo> individuos = new ArrayList<>();
     public interfaz() {
         initComponents();
-        
+        this.setLocationRelativeTo(null);
       
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -118,15 +124,25 @@ public class interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_inicioActionPerformed
+        cadena=txt_cadena.getText();
+        int numIndividuos= (int) sp_individuos.getValue();
+        individuo ind = null;
+
         if(txt_cadena.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Inserte una cadena");
         }else{
-            cadena=txt_cadena.getText();
-            int numIndividuos= (int) sp_individuos.getValue();
-            generacion g= new generacion(cadena.length(),numIndividuos , noGeneracion++);
-            g.cadenasAleatoreas();
-            g.evaluar(cadena);
-            txt_poblacion.setText(g.toString());
+            for (int i = 0; i < numIndividuos; i++) {
+                ind = new individuo(i+1, cadena.length() , cadena.trim());
+                //SIN HILOS
+                ind.generar();
+                ind.setCalificacion(ind.evaluar());
+                /*
+                CON HILOS
+                ind.strat();
+                */
+                individuos.add(ind);
+                txt_poblacion.append(ind.toString()+"\n");
+            }
         }
     }//GEN-LAST:event_bt_inicioActionPerformed
 
