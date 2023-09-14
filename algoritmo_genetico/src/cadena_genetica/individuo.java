@@ -29,15 +29,20 @@ public class individuo extends Thread {
         System.out.println(this.toString());
     }
 
+    // https://elcodigoascii.com.ar/
     public void generar() {
         String cad = "";
         for (int i = 0; i < lenCadena; i++) {
-            int numeroAleatorio = (int) ((Math.random() * 26) + 'a');
-            char letraAleatoria = (char) (numeroAleatorio);
+            // desde 65 a 122
+            int numeroAleatorio = (int) ((Math.random() * 52) + 65);
+            if (numeroAleatorio > 90) {
+                numeroAleatorio += 6; // Z-a NO
+            }
+            char letraAleatoria = (char) numeroAleatorio;
             cad += letraAleatoria;
         }
         setCadena(cad);
-    }
+}
 
     public int evaluar() {
         int similitud = 0;
