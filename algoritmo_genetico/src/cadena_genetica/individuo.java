@@ -82,4 +82,8 @@ public class individuo extends Thread {
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
     }
+
+    public int getNoGeneracion() {
+        return noGeneracion;
+    }
 }
