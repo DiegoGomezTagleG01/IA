@@ -222,9 +222,11 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_inicioActionPerformed
 
     public void generar_ruleta() {
+        // esta ruleta va desde 0 hasta la frec total
         int inicio = 0;
 
         for (individuo ind : individuos) {
+            // si es 0 su calif no se considera
             if (ind.getCalificacion() > 0) {
                 inicio += ind.getCalificacion();
                 ruleta.put(ind.getNoGeneracion(), inicio);
@@ -254,6 +256,7 @@ public class interfaz extends javax.swing.JFrame {
     }
 
     public int obtenerClaseEnRuleta(int numero) {
+        // posiciona el numero que recibe y regresa en que clase se encuentra
         int inicio = 0;
         for (Map.Entry<Integer, Integer> entry : ruleta.entrySet()) {
             int generacion = entry.getKey();
@@ -265,10 +268,11 @@ public class interfaz extends javax.swing.JFrame {
 
             inicio = fin;
         }
-        return -1;
+        return -1; // si NO estuviera (?)
     }
 
     public String obtenerCadenaPorGeneracion(int noGeneracion) {
+        // obtener la cadena que tiene la categoria
         for (individuo ind : individuos) {
             if (ind.getNoGeneracion() == noGeneracion) {
                 return ind.getCadena();
