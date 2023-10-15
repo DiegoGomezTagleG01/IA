@@ -32,7 +32,7 @@ public class Main {
 
         printTravelPrices(travelPrices,numberOfCities);
 
-        ÜberSalesmensch geneticAlgorithm = new ÜberSalesmensch(numberOfCities, SelectionType.ROULETTE, travelPrices, 0, 0);
+        Generacion geneticAlgorithm = new Generacion(numberOfCities, SelectionType.ROULETTE, travelPrices, 0, 0);
         vendedor result = geneticAlgorithm.optimize();
         System.out.println(result);
 

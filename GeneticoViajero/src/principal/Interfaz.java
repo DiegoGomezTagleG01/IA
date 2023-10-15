@@ -243,7 +243,7 @@ public class Interfaz extends javax.swing.JFrame {
         ciudadInicial=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el numero de ciudad con el que quiera empezar"));
        
         printTravelPrices(tablaDistancias,ciudades.size());
-        ÜberSalesmensch geneticAlgorithm = new ÜberSalesmensch(ciudades.size(), 
+        Generacion geneticAlgorithm = new Generacion(ciudades.size(), 
                 SelectionType.ROULETTE, tablaDistancias, ciudadInicial, 0);
         vendedor result = geneticAlgorithm.optimize();
         resultado.add(ciudadInicial);
