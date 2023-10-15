@@ -243,12 +243,13 @@ public class Interfaz extends javax.swing.JFrame {
         ciudadInicial=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el numero de ciudad con el que quiera empezar"));
        
         printTravelPrices(tablaDistancias,ciudades.size());
-        Generacion geneticAlgorithm = new Generacion(ciudades.size(), 
-                SelectionType.ROULETTE, tablaDistancias, ciudadInicial, 0);
-        vendedor result = geneticAlgorithm.optimize();
+
+        Generacion posiblesCaminos = new Generacion(ciudades.size(),tablaDistancias, ciudadInicial, 0);
+        vendedor solucion = posiblesCaminos.iniciar();
+        
         resultado.add(ciudadInicial);
-        for(int i=0;i<result.posibleSolucion.size();i++){
-            resultado.add(result.posibleSolucion.get(i));
+        for(int i=0;i<solucion.posibleSolucion.size();i++){
+            resultado.add(solucion.posibleSolucion.get(i));
         }
         resultado.add(ciudadInicial);
         
@@ -264,7 +265,7 @@ public class Interfaz extends javax.swing.JFrame {
                 txt_resultado.append("\n POR ULTIMO  "+resultado.get(i)+ "("+ciudades.get(resultado.get(i)).distancias.get(resultado.get(i-1))+"px)");
              }
         }
-        System.out.println(result);
+        System.out.println(solucion);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed

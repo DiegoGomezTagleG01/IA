@@ -32,8 +32,8 @@ public class Main {
 
         printTravelPrices(travelPrices,numberOfCities);
 
-        Generacion geneticAlgorithm = new Generacion(numberOfCities, SelectionType.ROULETTE, travelPrices, 0, 0);
-        vendedor result = geneticAlgorithm.optimize();
+        Generacion geneticAlgorithm = new Generacion(numberOfCities, travelPrices, 0, 0);
+        vendedor result = geneticAlgorithm.iniciar();
         System.out.println(result);
 
     }

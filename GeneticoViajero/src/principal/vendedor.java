@@ -7,7 +7,7 @@ public class vendedor implements Comparable {
     int ciudadInicial;
     int numeroCiudades = 0;
     int aptitud;
-
+    //constructor pricipal
     public vendedor(int numeroCiudades, int[][] tablaDistancias, int ciudadInicial){
         this.tablaDistancias = tablaDistancias;
         this.ciudadInicial = ciudadInicial;
@@ -15,9 +15,9 @@ public class vendedor implements Comparable {
         posibleSolucion = ruta();
         aptitud = this.calcularAptitud();
     }
-
-    public vendedor(List<Integer> permutationOfCities, int numeroCiudades, int[][] tablaDistancias, int ciudadInicial){
-        posibleSolucion = permutationOfCities;
+    //este constructor se usa cuando existio una mutacion 
+    public vendedor(List<Integer> solucionMutada, int numeroCiudades, int[][] tablaDistancias, int ciudadInicial){
+        posibleSolucion = solucionMutada;
         this.tablaDistancias = tablaDistancias;
         this.ciudadInicial = ciudadInicial;
         this.numeroCiudades = numeroCiudades;
@@ -27,25 +27,25 @@ public class vendedor implements Comparable {
     public int calcularAptitud(){
         int aptitud = 0;
         int ciudadActual = ciudadInicial;
-        for ( int gene : posibleSolucion) {
-            aptitud += tablaDistancias[ciudadActual][gene];
-            ciudadActual = gene;
+        for ( int gen : posibleSolucion) {
+            aptitud += tablaDistancias[ciudadActual][gen];
+            ciudadActual = gen;
         }
         aptitud += tablaDistancias[posibleSolucion.get(numeroCiudades-2)][ciudadInicial];
         return aptitud;
     }
-
+    //genera una posible ruta
     private List<Integer> ruta(){
         List<Integer> resultado = new ArrayList<Integer>();
         for(int i=0; i<numeroCiudades; i++) {
             if(i!=ciudadInicial)
                 resultado.add(i);
         }
-        Collections.shuffle(resultado);
+        Collections.shuffle(resultado); //ordena los elementos de forma aleatorea 
         return resultado;
     }
 
-    public List<Integer> getGenome() {
+    public List<Integer> getPosibleSolucion() {
         return posibleSolucion;
     }
 
@@ -63,31 +63,27 @@ public class vendedor implements Comparable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Path: ");
-        sb.append(ciudadInicial);
+        String cad="\nVendedor";
+        cad+="\nRuta: ["+ ciudadInicial+"]";
         posibleSolucion.add(ciudadInicial);
-        for ( int gene: posibleSolucion ) {
-            sb.append(" ");
-            sb.append(gene);
+        for ( int solucion: posibleSolucion ) {
+            cad+=" ";
+            cad+=" ["+solucion+"]";
         }
-        sb.append(" ");
-        
-        //sb.append(ciudadInicial);
-        sb.append("\nLength: ");
-        sb.append(this.aptitud);
-        return sb.toString();
+        cad+="\nDistancia: "+this.aptitud;
+        return cad;
     }
 
 
     @Override
-    public int compareTo(Object o) {
+    //comparamos los vendedores por su aptitud, esto nos sirve para acomodar de menor a mayor
+    public int compareTo(Object o) { 
         vendedor posibleSolucion = (vendedor) o;
-        if(this.aptitud > posibleSolucion.getAptitud())
+        if(this.aptitud > posibleSolucion.getAptitud()) //si la aptitud es mayor a la posiblesolucion, devuelve 1
             return 1;
-        else if(this.aptitud < posibleSolucion.getAptitud())
+        else if(this.aptitud < posibleSolucion.getAptitud()) //si la aptitud es menor a la posiblesolucion, devuelve -1
             return -1;
         else
-            return 0;
+            return 0; //si la aptitud es igual a la posiblesolucion, devuelve 0
     }
 }

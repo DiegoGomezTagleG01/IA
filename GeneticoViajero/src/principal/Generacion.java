@@ -9,21 +9,19 @@ public class Generacion {
     private int itecionesMax;   //maximo de iteraciones para evitar sobrecarga 
     private float probabilidad_mutacion; //probabilidad de mutacion
     private int tam_torneo;     //elementos elegidos en el torneo 
-    private SelectionType selectionType;
-    private int[][] tablaDistancias;
-    private int ciudadInicial;
-    private int aptitudObjetivo;
+    private int[][] tablaDistancias;    //matriz de distancias
+    private int ciudadInicial;  //ciudad donde empieza el recorrido
+    private int aptitudObjetivo;    //aptitud que se aspira tener
 
-    public Generacion(int numeroCiudades, SelectionType selectionType, int[][] tablaDistancias, int ciudadInicial, int aptitudObjetivo){
+    public Generacion(int numeroCiudades, int[][] tablaDistancias, int ciudadInicial, int aptitudObjetivo){
         this.numeroCiudades = numeroCiudades;
         this.tam_posibleSolucion = numeroCiudades-1;
-        this.selectionType = selectionType;
         this.tablaDistancias = tablaDistancias;
         this.ciudadInicial = ciudadInicial;
         this.aptitudObjetivo = aptitudObjetivo;
 
         tam_generacion = 5000;
-        tam_reproduccion    = 200;
+        tam_reproduccion = 200;
         itecionesMax = 1000;
         probabilidad_mutacion = 0.1f;
         tam_torneo = 40;
@@ -39,123 +37,113 @@ public class Generacion {
 
     public List<vendedor> seleccion(List<vendedor> poblacion){
         List<vendedor> seleccionado = new ArrayList<>();
-        vendedor winner;
         for(int i=0; i<tam_reproduccion;     i++){
-            if(selectionType == SelectionType.ROULETTE){
-                seleccionado.add(rouletteSelection(poblacion));
-            }
-            else if(selectionType == SelectionType.TOURNAMENT){
-                seleccionado.add(tournamentSelection(poblacion));
-            }
+            seleccionado.add(ruleta(poblacion));
         }
 
         return seleccionado;
     }
 
-    public vendedor rouletteSelection(List<vendedor> poblacion){
+    public vendedor ruleta(List<vendedor> poblacion){
         int totalAptitud = poblacion.stream().map(vendedor::getAptitud).mapToInt(Integer::intValue).sum();
         Random random = new Random();
-        int selectedValue = random.nextInt(totalAptitud);
-        float recValue = (float) 1/selectedValue;
-        float currentSum = 0;
-        for(vendedor genome : poblacion){
-            currentSum += (float) 1/genome.getAptitud();
-            if(currentSum>=recValue){
-                return genome;
+        int valorSeleccionado = random.nextInt(totalAptitud);
+        float recValue = (float) 1/valorSeleccionado;
+        float suma = 0;
+        for(vendedor posibleSolucion : poblacion){
+            suma += (float) 1/posibleSolucion.getAptitud();
+            if(suma>=recValue){
+                return posibleSolucion;
             }
         }
-        int selectRandom = random.nextInt(tam_generacion);
-        return poblacion.get(selectRandom);
+        int seleccionAleatorea = random.nextInt(tam_generacion);
+        return poblacion.get(seleccionAleatorea);
     }
-
-    public static <E> List<E> pickNRandomElements(List<E> list, int n) {
+    //metodo estatico que devuelve una lista que tiene n elementos de manera aleatorea
+    public static <E> List<E> tomarElementos(List<E> list, int n) {
         Random r = new Random();
-        int length = list.size();
+        int tam = list.size();
 
-        if (length < n) return null;
+        if (tam < n) return null;
 
-        for (int i = length - 1; i >= length - n; --i)
+        for (int i = tam - 1; i >= tam - n; --i)
         {
             Collections.swap(list, i , r.nextInt(i + 1));
         }
-        return list.subList(length - n, length);
+        return list.subList(tam - n, tam);
     }
 
-    public vendedor tournamentSelection(List<vendedor> poblacion){
-        List<vendedor> selected = pickNRandomElements(poblacion,tam_torneo);
-        return Collections.min(selected);
-    }
-
-    public vendedor mutate(vendedor ven){
+    public vendedor mutacion(vendedor ven){
         Random random = new Random();
-        float mutate = random.nextFloat();
-        if(mutate<probabilidad_mutacion) {
-            List<Integer> genome = ven.getGenome();
-            Collections.swap(genome, random.nextInt(tam_posibleSolucion), random.nextInt(tam_posibleSolucion));
-            return new vendedor(genome, numeroCiudades, tablaDistancias, ciudadInicial);
+        float mutacion = random.nextFloat();
+        if(mutacion<probabilidad_mutacion) {
+            List<Integer> posibleSolucionMutada = ven.getPosibleSolucion();
+            Collections.swap(posibleSolucionMutada, random.nextInt(tam_posibleSolucion), random.nextInt(tam_posibleSolucion));
+            return new vendedor(posibleSolucionMutada, numeroCiudades, tablaDistancias, ciudadInicial);
         }
         return ven;
     }
 
-    public List<vendedor> createGeneration(List<vendedor> poblacion){
-        List<vendedor> generation = new ArrayList<>();
-        int currentGenerationSize = 0;
-        while(currentGenerationSize < tam_generacion){
-            List<vendedor> parents = pickNRandomElements(poblacion,2);
-            List<vendedor> children = crossover(parents);
-            children.set(0, mutate(children.get(0)));
-            children.set(1, mutate(children.get(1)));
-            generation.addAll(children);
-            currentGenerationSize+=2;
+    public List<vendedor> generarNuevaGeneracion(List<vendedor> poblacion){
+        List<vendedor> generacion = new ArrayList<>();
+        int tam_generacionActual = 0;
+        while(tam_generacionActual < tam_generacion){
+            List<vendedor> padres = tomarElementos(poblacion,2);
+            List<vendedor> hijo = cruza(padres);
+            hijo.set(0, mutacion(hijo.get(0)));
+            hijo.set(1, mutacion(hijo.get(1)));
+            generacion.addAll(hijo);
+            tam_generacionActual+=2;
         }
-        return generation;
+        return generacion;
     }
 
-    public List<vendedor> crossover(List<vendedor> parents){
-        // housekeeping
+    public List<vendedor> cruza(List<vendedor> padres){
+        //generamos el punto donde se cruzaran los padres
         Random random = new Random();
-        int breakpoint = random.nextInt(tam_posibleSolucion);
-        List<vendedor> children = new ArrayList<>();
+        int puntoDeCruza = random.nextInt(tam_posibleSolucion);
+        List<vendedor> hijo = new ArrayList<>();
 
-        // copy parental genomes - we copy so we wouldn't modify in case they were
-        // chosen to participate in crossover multiple times
-        List<Integer> parent1Genome = new ArrayList<>(parents.get(0).getGenome());
-        List<Integer> parent2Genome = new ArrayList<>(parents.get(1).getGenome());
+        // Se copian los padres para no modificarlos
+        List<Integer> solucionPadre1 = new ArrayList<>(padres.get(0).getPosibleSolucion());
+        List<Integer> solucionPadre2 = new ArrayList<>(padres.get(1).getPosibleSolucion());
 
-        // creating child 1
-        for(int i = 0; i<breakpoint; i++){
-            int newVal;
-            newVal = parent2Genome.get(i);
-            Collections.swap(parent1Genome,parent1Genome.indexOf(newVal),i);
+        // cruza hijo 1
+        for(int i = 0; i<puntoDeCruza; i++){
+            int nuevaSolucion;
+            nuevaSolucion = solucionPadre2.get(i);
+            Collections.swap(solucionPadre1,solucionPadre1.indexOf(nuevaSolucion),i);
         }
-        children.add(new vendedor(parent1Genome,numeroCiudades,tablaDistancias,ciudadInicial));
-        parent1Genome = parents.get(0).getGenome(); // reseting the edited parent
+        hijo.add(new vendedor(solucionPadre1,numeroCiudades,tablaDistancias,ciudadInicial));
+        solucionPadre1 = padres.get(0).getPosibleSolucion(); // reseting the edited parent
 
-        // creating child 2
-        for(int i = breakpoint; i<tam_posibleSolucion; i++){
-            int newVal = parent1Genome.get(i);
-            Collections.swap(parent2Genome,parent2Genome.indexOf(newVal),i);
+        // cruza hijo 1
+        for(int i = puntoDeCruza; i<tam_posibleSolucion; i++){
+            int nuevaSolucion = solucionPadre1.get(i);
+            Collections.swap(solucionPadre2,solucionPadre2.indexOf(nuevaSolucion),i);
         }
-        children.add(new vendedor(parent2Genome,numeroCiudades,tablaDistancias,ciudadInicial));
+        hijo.add(new vendedor(solucionPadre2,numeroCiudades,tablaDistancias,ciudadInicial));
 
-        return children;
+        return hijo;
     }
 
-    public vendedor optimize(){
-        List<vendedor> poblacion = poblacionInicial();
-        vendedor globalBestGenome = poblacion.get(0);
+    public vendedor iniciar(){
+        List<vendedor> poblacion = poblacionInicial(); //genera poblacion inicial
+        vendedor mejorSolucion = poblacion.get(0); //inicializamos la mejor solucion 
         for(int i=0; i<itecionesMax; i++){
-            List<vendedor> selected = seleccion(poblacion);
-            poblacion = createGeneration(selected);
-            globalBestGenome = Collections.min(poblacion);
-            if(globalBestGenome.getAptitud() < aptitudObjetivo)
+            List<vendedor> seleccionados = seleccion(poblacion); //realizamos el proceso de seleccion por ruleta
+            poblacion = generarNuevaGeneracion(seleccionados);   //creamos una poblacion con los elementos seleccionados
+            mejorSolucion = Collections.min(poblacion);     //busca el vendedor con la menor aptitud ya que buscamos la aptitud 0
+            if(mejorSolucion.getAptitud() < aptitudObjetivo){ //si la aptitud de la mejor solucion es menor entonces se detiene, se encontro la solucion
                 break;
+            }
+                
         }
-        return globalBestGenome;
+        return mejorSolucion;   //devuelve al mejor vendedor
     }
 
-    public void printGeneration(List<vendedor> generation ){
-        for( vendedor genome : generation){
+    public void printGeneration(List<vendedor> generacion ){
+        for( vendedor genome : generacion){
             System.out.println(genome);
         }
     }
