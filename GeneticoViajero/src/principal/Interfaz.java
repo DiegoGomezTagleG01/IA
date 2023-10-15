@@ -60,7 +60,7 @@ public class Interfaz extends javax.swing.JFrame {
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 679, Short.MAX_VALUE)
+            .addGap(0, 677, Short.MAX_VALUE)
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +127,7 @@ public class Interfaz extends javax.swing.JFrame {
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addComponent(btn_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +143,7 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(btn_borrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
@@ -178,24 +178,47 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int numCiudades;
-        numCiudades=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el numero de ciudades que desea"));
+       
+        g=panelPrincipal.getGraphics();
+        Graphics2D g2d = (Graphics2D) g;
+        try {
+            numCiudades=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el numero de ciudades que desea"));
+            if(numCiudades!=0){
+                for(int i=0;i<numCiudades;i++){
+                    int posx=(int)(Math.random()*670);
+                    int posy=(int)(Math.random()*650);
+                    Color col= new Color((int)(Math.random()*255+0),(int)(Math.random()*255+0),(int)(Math.random()*255+0));
+                    ciudad c= new ciudad(posx,posy,numero, col);   
+                    g2d.setColor(col);
+                    g2d.drawString("Ciudad "+ numero, posx+14, posy+14);
+                    numero++;
+                    ciudades.add(c);
+                    g.setColor(col);
+                    g.fillOval(posx, posy,15, 15);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Inserte un valor numero!");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void panelPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPrincipalMouseClicked
         g=panelPrincipal.getGraphics();
-
         repintar();
         int posx =panelPrincipal.getMousePosition().x;
         int posy =panelPrincipal.getMousePosition().y;
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(3));
         Color col= new Color((int)(Math.random()*255+0),(int)(Math.random()*255+0),(int)(Math.random()*255+0));
+        
         g2d.setColor(col);
-        g2d.drawString("Ciudad "+ numero, posx+7, posy+7);
+        g2d.drawString("Ciudad "+ numero, posx+14, posy+14);
         ciudad c= new ciudad(posx,posy,numero, col);
         numero++;
         ciudades.add(c);
         g.setColor(col);
-        g.fillOval(panelPrincipal.getMousePosition().x, panelPrincipal.getMousePosition().y,10, 10);
+        g.fillOval(panelPrincipal.getMousePosition().x, panelPrincipal.getMousePosition().y,15, 15);
         
     }//GEN-LAST:event_panelPrincipalMouseClicked
 
@@ -204,11 +227,10 @@ public class Interfaz extends javax.swing.JFrame {
     int posy;
     
     tablaDistancias = new int[ciudades.size()][ciudades.size()];
-    //System.out.println(tablaDistancias.length);
     
     for(int j=0;j<ciudades.size();j++){
-        posx=ciudades.get(j).posX+3;
-        posy=ciudades.get(j).posY+3;
+        posx=ciudades.get(j).posX+5;
+        posy=ciudades.get(j).posY+5;
         ciudades.get(j).distancias.clear();
         for(int i=0;i<ciudades.size();i++){
             Graphics2D g2d = (Graphics2D) g;
@@ -240,53 +262,66 @@ public class Interfaz extends javax.swing.JFrame {
         txt_resultado.setText("");
         int ciudadInicial;
         resultado.clear();
-        ciudadInicial=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el numero de ciudad con el que quiera empezar"));
        
-        printTravelPrices(tablaDistancias,ciudades.size());
+        try {
+            ciudadInicial=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el numero de ciudad con el que quiera empezar"));
+            if(ciudadInicial<ciudades.size() && ciudadInicial>=0){
+                printTravelPrices(tablaDistancias,ciudades.size());
 
-        Generacion posiblesCaminos = new Generacion(ciudades.size(),tablaDistancias, ciudadInicial, 0);
-        vendedor solucion = posiblesCaminos.iniciar();
+                Generacion posiblesCaminos = new Generacion(ciudades.size(),tablaDistancias, ciudadInicial, 0);
+                vendedor solucion = posiblesCaminos.iniciar();
+
+                resultado.add(ciudadInicial);
+                for(int i=0;i<solucion.posibleSolucion.size();i++){
+                    resultado.add(solucion.posibleSolucion.get(i));
+                }
+                resultado.add(ciudadInicial);
+
+                //resultado.add(ciudadInicial);
+                 for ( int i: resultado ) {
+                   System.out.print(" ["+i+"]");
+                }
+                pintarSolucion();
+                txt_resultado.append("\n SE EMPIEZA EL VIAJE EN LA CIUDAD "+resultado.get(0));
+                for(int i=1;i<resultado.size();i++){
+                     txt_resultado.append("\n DESPUES SE TOMA LA CIUDAD  "+resultado.get(i)+ "("+ciudades.get(resultado.get(i)).distancias.get(resultado.get(i-1))+"px)");
+                     if(i-1==resultado.size()){
+                        txt_resultado.append("\n POR ULTIMO  "+resultado.get(i)+ "("+ciudades.get(resultado.get(i)).distancias.get(resultado.get(i-1))+"px)");
+                     }
+                }
+                txt_resultado.append("\n DISTANCIA TOTAL: "+solucion.aptitud);
+                System.out.println(solucion);
+            }else{
+                 JOptionPane.showMessageDialog(null, "Inserte el valor de una ciudad Valida");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Inserte un valor valido!");
+        }
         
-        resultado.add(ciudadInicial);
-        for(int i=0;i<solucion.posibleSolucion.size();i++){
-            resultado.add(solucion.posibleSolucion.get(i));
-        }
-        resultado.add(ciudadInicial);
-        
-        //resultado.add(ciudadInicial);
-         for ( int i: resultado ) {
-           System.out.print(" ["+i+"]");
-        }
-        pintarSolucion();
-        txt_resultado.append("\n SE EMPIEZA EL VIAJE EN LA CIUDAD "+resultado.get(0));
-        for(int i=1;i<resultado.size();i++){
-             txt_resultado.append("\n DESPUES SE TOMA LA CIUDAD  "+resultado.get(i)+ "("+ciudades.get(resultado.get(i)).distancias.get(resultado.get(i-1))+"px)");
-             if(i-1==resultado.size()){
-                txt_resultado.append("\n POR ULTIMO  "+resultado.get(i)+ "("+ciudades.get(resultado.get(i)).distancias.get(resultado.get(i-1))+"px)");
-             }
-        }
-        System.out.println(solucion);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed
-    resultado.clear();
-    ciudades.clear();
-    panelPrincipal.removeAll();
-    panelPrincipal.repaint();
-    panelPrincipal.revalidate();
-    numero=0;
-    txt_matriz.setText("");
-    txt_resultado.setText("");
+        limpiar();
     
     }//GEN-LAST:event_btn_borrarActionPerformed
+    public void limpiar(){
+        resultado.clear();
+        ciudades.clear();
+        panelPrincipal.removeAll();
+        panelPrincipal.repaint();
+        panelPrincipal.revalidate();
+        numero=0;
+        txt_matriz.setText("");
+        txt_resultado.setText("");
+    }
     public void repintar(){
         Color col= new Color((int)(Math.random()*255+0),(int)(Math.random()*255+0),(int)(Math.random()*255+0));
         g.setColor(col);
         
         for(ciudad c: ciudades){
             g.setColor(c.col);
-            g.drawString("Ciudad "+ c.numeroCiudad, c.posX+7, c.posY+7);
-            g.fillOval(c.posX, c.posY,10, 10);
+            g.drawString("Ciudad "+ c.numeroCiudad, c.posX+14, c.posY+14);
+            g.fillOval(c.posX, c.posY,15, 15);
         }
     }
     public int distancia(ciudad c1, ciudad c2){     
