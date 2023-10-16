@@ -262,14 +262,12 @@ public class Interfaz extends javax.swing.JFrame {
             int distancia=distancia(ciudades.get(j),ciudades.get(i));
             ciudades.get(j).distancias.add(distancia);
             if(distancia!=0){
-                
                 g2d.setColor(Color.BLACK);
                 g2d.drawString(distancia+"px", (posx +ciudades.get(i).posX+3 ) / 2, (posy + ciudades.get(i).posY+3) / 2);
                 g.drawLine(posx, posy, ciudades.get(i).posX+3, ciudades.get(i).posY+3);
             }
             
             tablaDistancias[j][i]=distancia(ciudades.get(j),ciudades.get(i));
-           
         }
     }
     repintar();
@@ -279,7 +277,6 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        //txt_matriz.setText("");
         txt_resultado.setText("");
         txt_generaciones.setText("");
         int ciudadInicial;
@@ -287,10 +284,8 @@ public class Interfaz extends javax.swing.JFrame {
        
         try {
             ciudadInicial=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el numero de ciudad con el que quiera empezar"));
-            
             if(ciudadInicial<ciudades.size() && ciudadInicial>=0 && tablaDistancias!=null){
                 
-
                 Generacion posiblesCaminos = new Generacion(ciudades.size(),tablaDistancias, ciudadInicial, 0, txt_generaciones);
                 //vendedor solucion = posiblesCaminos.iniciar();
                 try {
@@ -311,6 +306,7 @@ public class Interfaz extends javax.swing.JFrame {
                    System.out.print(" ["+i+"]");
                 }
                 pintarSolucion();
+                txt_resultado.append("\n SOLUCION ENCONTRADA EN EL MEJOR \nINDIVIDUO DE LA GENERACION:"+solucion.noGeneracion );
                 txt_resultado.append("\n SE EMPIEZA EL VIAJE EN LA CIUDAD "+resultado.get(0));
                 for(int i=1;i<resultado.size();i++){
                      txt_resultado.append("\n DESPUES SE TOMA LA CIUDAD  "+resultado.get(i)+ "("+ciudades.get(resultado.get(i)).distancias.get(resultado.get(i-1))+"px)");

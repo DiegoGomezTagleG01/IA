@@ -7,11 +7,13 @@ public class vendedor implements Comparable, Runnable {
     int ciudadInicial;
     int numeroCiudades = 0;
     int aptitud;
+    int noGeneracion;
     //constructor pricipal
-    public vendedor(int numeroCiudades, int[][] tablaDistancias, int ciudadInicial){
+    public vendedor(int numeroCiudades, int[][] tablaDistancias, int ciudadInicial, int noG){
         this.tablaDistancias = tablaDistancias;
         this.ciudadInicial = ciudadInicial;
         this.numeroCiudades = numeroCiudades;
+        noGeneracion=noG;
         posibleSolucion = ruta();
         aptitud = this.calcularAptitud();
     }
@@ -63,7 +65,7 @@ public class vendedor implements Comparable, Runnable {
 
     @Override
     public String toString() {
-        String cad="\nVendedor";
+        String cad="\nVendedor: ";
         cad+="\nRuta: ["+ ciudadInicial+"]";
         for ( int solucion: posibleSolucion ) {
             cad+=" ";

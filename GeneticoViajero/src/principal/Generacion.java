@@ -16,6 +16,7 @@ public class Generacion implements Runnable{
     int noGeneracion;
     JTextArea txt_generaciones;
     vendedor mejorSolucion;
+    List<vendedor> mejoresSoluciones = new ArrayList<>();
 
     public Generacion(int numeroCiudades, int[][] tablaDistancias, int ciudadInicial, int aptitudObjetivo, JTextArea generaciones){
         this.numeroCiudades = numeroCiudades;
@@ -35,11 +36,11 @@ public class Generacion implements Runnable{
     public List<vendedor> poblacionInicial(){
         List<vendedor> poblacion = new ArrayList<>();
         for(int i=0; i<tam_generacion; i++){
-            poblacion.add(new vendedor(numeroCiudades, tablaDistancias, ciudadInicial));
+            poblacion.add(new vendedor(numeroCiudades, tablaDistancias, ciudadInicial, noGeneracion));
         }
         return poblacion;
     }
-
+    
     public List<vendedor> seleccion(List<vendedor> poblacion){
         List<vendedor> seleccionado = new ArrayList<>();
         for(int i=0; i<tam_reproduccion;     i++){
@@ -68,7 +69,6 @@ public class Generacion implements Runnable{
     public static <E> List<E> tomarElementos(List<E> list, int n) {
         Random r = new Random();
         int tam = list.size();
-
         if (tam < n) return null;
 
         for (int i = tam - 1; i >= tam - n; --i){
@@ -96,9 +96,14 @@ public class Generacion implements Runnable{
             List<vendedor> hijo = cruza(padres);
             hijo.set(0, mutacion(hijo.get(0)));
             hijo.set(1, mutacion(hijo.get(1)));
+            
             generacion.addAll(hijo);
             tam_generacionActual+=2;
         }
+        for(int i=0; i<generacion.size();i++){
+            generacion.get(i).noGeneracion++;
+        }
+        
         return generacion;
     }
 
@@ -133,9 +138,9 @@ public class Generacion implements Runnable{
 
     public void iniciar(){
         List<vendedor> poblacion = poblacionInicial(); //genera poblacion inicial
-        int mejorAptitud=Collections.min(poblacion).aptitud ;
+        //int mejorAptitud=Collections.min(poblacion).aptitud ;
         //System.out.println("Aptitud inicial"+mejorAptitud);
-        int contador=0;
+        //int contador=0;
         mejorSolucion = poblacion.get(0); //inicializamos la mejor solucion 
         for(int i=0; i<itecionesMax; i++){
             //imprimirGeneracion(poblacion);
@@ -144,27 +149,15 @@ public class Generacion implements Runnable{
             List<vendedor> seleccionados = seleccion(poblacion); //realizamos el proceso de seleccion por ruleta
             poblacion = generarNuevaGeneracion(seleccionados);   //creamos una poblacion con los elementos seleccionados
             mejorSolucion = Collections.min(poblacion);     //busca el vendedor con la menor aptitud ya que buscamos la aptitud 0
-            
+            mejorSolucion.noGeneracion=noGeneracion;
+            mejoresSoluciones.add(mejorSolucion);  
             cad+="\nMejor Solucion De la generacion: "+ mejorSolucion;
             noGeneracion++;
             cad+="\n-----------------------------";
             txt_generaciones.append(cad);
-            //System.out.println("La aptitud de la mejor solucion "+mejorSolucion.getAptitud());
-           
-            if(mejorSolucion.getAptitud() <=mejorAptitud ){ //si la aptitud de la mejor solucion es menor entonces se detiene, se encontro la solucion
-                System.out.println("hola");
-                if(mejorSolucion.getAptitud()==mejorAptitud){
-                    contador++;
-                }
-                mejorAptitud=mejorSolucion.getAptitud();
-                if(contador==10){
-                    break;
-                }
-                
-            }
-           
-                
         }
+        mejorSolucion = Collections.min(mejoresSoluciones);
+        
         
     }
     public void run() {
