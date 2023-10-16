@@ -134,7 +134,7 @@ public class Generacion implements Runnable{
     public void iniciar(){
         List<vendedor> poblacion = poblacionInicial(); //genera poblacion inicial
         int mejorAptitud=Collections.min(poblacion).aptitud ;
-        System.out.println("Aptitud inicial"+mejorAptitud);
+        //System.out.println("Aptitud inicial"+mejorAptitud);
         int contador=0;
         mejorSolucion = poblacion.get(0); //inicializamos la mejor solucion 
         for(int i=0; i<itecionesMax; i++){
@@ -149,7 +149,7 @@ public class Generacion implements Runnable{
             noGeneracion++;
             cad+="\n-----------------------------";
             txt_generaciones.append(cad);
-            System.out.println("La aptitud de la mejor solucion "+mejorSolucion.getAptitud());
+            //System.out.println("La aptitud de la mejor solucion "+mejorSolucion.getAptitud());
            
             if(mejorSolucion.getAptitud() <=mejorAptitud ){ //si la aptitud de la mejor solucion es menor entonces se detiene, se encontro la solucion
                 System.out.println("hola");
