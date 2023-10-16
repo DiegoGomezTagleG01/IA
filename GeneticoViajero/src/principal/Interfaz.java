@@ -8,7 +8,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import static principal.Main.printTravelPrices;
+
 
 
 
@@ -22,6 +22,9 @@ public class Interfaz extends javax.swing.JFrame {
     
     public Interfaz() {
         initComponents();
+        txt_generaciones.setEditable(false);
+        txt_matriz.setEditable(false);
+        txt_resultado.setEditable(false);
     }
 
     /**
@@ -45,9 +48,11 @@ public class Interfaz extends javax.swing.JFrame {
         txt_matriz = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         btn_borrar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txt_generaciones = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 700));
 
         panelPrincipal.setBackground(new java.awt.Color(255, 255, 204));
         panelPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -64,7 +69,7 @@ public class Interfaz extends javax.swing.JFrame {
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 688, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 204));
@@ -109,47 +114,64 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        txt_generaciones.setColumns(20);
+        txt_generaciones.setRows(5);
+        jScrollPane3.setViewportView(txt_generaciones);
+
+        jLabel3.setText("Generaciones");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addComponent(btn_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton2)
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton3))
-                    .addComponent(btn_borrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(132, 132, 132))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(32, 32, 32)
+                                .addComponent(jButton2)
+                                .addGap(33, 33, 33)
+                                .addComponent(jButton3))
+                            .addComponent(btn_borrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3)
+                        .addGap(6, 6, 6)))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,8 +182,8 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,11 +269,10 @@ public class Interfaz extends javax.swing.JFrame {
             }
             
             tablaDistancias[j][i]=distancia(ciudades.get(j),ciudades.get(i));
-            //System.out.print(travelDistances[j][i]);
+           
         }
     }
     repintar();
-    //imprimirDistancia();
     distancias();
 
       
@@ -260,25 +281,33 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //txt_matriz.setText("");
         txt_resultado.setText("");
+        txt_generaciones.setText("");
         int ciudadInicial;
         resultado.clear();
        
         try {
             ciudadInicial=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el numero de ciudad con el que quiera empezar"));
-            if(ciudadInicial<ciudades.size() && ciudadInicial>=0){
-                printTravelPrices(tablaDistancias,ciudades.size());
+            
+            if(ciudadInicial<ciudades.size() && ciudadInicial>=0 && tablaDistancias!=null){
+                
 
-                Generacion posiblesCaminos = new Generacion(ciudades.size(),tablaDistancias, ciudadInicial, 0);
-                vendedor solucion = posiblesCaminos.iniciar();
-
+                Generacion posiblesCaminos = new Generacion(ciudades.size(),tablaDistancias, ciudadInicial, 0, txt_generaciones);
+                //vendedor solucion = posiblesCaminos.iniciar();
+                try {
+                    Thread t = new Thread(posiblesCaminos);
+                    t.start();
+                    t.join();
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                }
+                vendedor solucion=posiblesCaminos.mejorSolucion;
                 resultado.add(ciudadInicial);
                 for(int i=0;i<solucion.posibleSolucion.size();i++){
                     resultado.add(solucion.posibleSolucion.get(i));
                 }
                 resultado.add(ciudadInicial);
 
-                //resultado.add(ciudadInicial);
-                 for ( int i: resultado ) {
+                for ( int i: resultado ) {
                    System.out.print(" ["+i+"]");
                 }
                 pintarSolucion();
@@ -295,7 +324,7 @@ public class Interfaz extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(null, "Inserte el valor de una ciudad Valida");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Inserte un valor valido!");
+            JOptionPane.showMessageDialog(null, "Error! \n asegurese de insertar un valor valido y/o unir caminos");
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -313,6 +342,7 @@ public class Interfaz extends javax.swing.JFrame {
         numero=0;
         txt_matriz.setText("");
         txt_resultado.setText("");
+        txt_generaciones.setText("");
     }
     public void repintar(){
         Color col= new Color((int)(Math.random()*255+0),(int)(Math.random()*255+0),(int)(Math.random()*255+0));
@@ -325,7 +355,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     public int distancia(ciudad c1, ciudad c2){     
-        int distanciaP= (int)Math.sqrt(Math.pow(c2.posX-c1.posX, 2)+Math.pow(c2.posX-c1.posX, 2));
+        int distanciaP= (int)Math.sqrt(Math.pow(c2.posX-c1.posX, 2)+Math.pow(c2.posY-c1.posY, 2));
         return distanciaP;            
     }
     public void imprimirDistancia(){
@@ -402,10 +432,13 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JTextArea txt_generaciones;
     private javax.swing.JTextArea txt_matriz;
     private javax.swing.JTextArea txt_resultado;
     // End of variables declaration//GEN-END:variables

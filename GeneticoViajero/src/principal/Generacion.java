@@ -1,30 +1,35 @@
 package principal;
 import java.util.*;
 
-public class Generacion {
-    private int tam_generacion;  //integrantes de la generacion
-    private int tam_posibleSolucion; //tamanio del recorrido
-    private int numeroCiudades; //numero de ciudades por recorrer
-    private int tam_reproduccion;   //tamanio de la cruza
-    private int itecionesMax;   //maximo de iteraciones para evitar sobrecarga 
-    private float probabilidad_mutacion; //probabilidad de mutacion
-    private int tam_torneo;     //elementos elegidos en el torneo 
-    private int[][] tablaDistancias;    //matriz de distancias
-    private int ciudadInicial;  //ciudad donde empieza el recorrido
-    private int aptitudObjetivo;    //aptitud que se aspira tener
+import javax.swing.JTextArea;
 
-    public Generacion(int numeroCiudades, int[][] tablaDistancias, int ciudadInicial, int aptitudObjetivo){
+public class Generacion implements Runnable{
+    int tam_generacion;  //integrantes de la generacion
+    int tam_posibleSolucion; //tamanio del recorrido
+    int numeroCiudades; //numero de ciudades por recorrer
+    int tam_reproduccion;   //tamanio de la cruza
+    int itecionesMax;   //maximo de iteraciones para evitar sobrecarga 
+    float probabilidad_mutacion; //probabilidad de mutacion
+    int[][] tablaDistancias;    //matriz de distancias
+    int ciudadInicial;  //ciudad donde empieza el recorrido
+    int aptitudObjetivo;    //aptitud que se aspira tener
+    int noGeneracion;
+    JTextArea txt_generaciones;
+    vendedor mejorSolucion;
+
+    public Generacion(int numeroCiudades, int[][] tablaDistancias, int ciudadInicial, int aptitudObjetivo, JTextArea generaciones){
         this.numeroCiudades = numeroCiudades;
         this.tam_posibleSolucion = numeroCiudades-1;
         this.tablaDistancias = tablaDistancias;
         this.ciudadInicial = ciudadInicial;
         this.aptitudObjetivo = aptitudObjetivo;
+        this.txt_generaciones=generaciones;
 
         tam_generacion = 5000;
         tam_reproduccion = 200;
-        itecionesMax = 1000;
+        itecionesMax = 500;
         probabilidad_mutacion = 0.1f;
-        tam_torneo = 40;
+        noGeneracion=1;
     }
 
     public List<vendedor> poblacionInicial(){
@@ -66,8 +71,7 @@ public class Generacion {
 
         if (tam < n) return null;
 
-        for (int i = tam - 1; i >= tam - n; --i)
-        {
+        for (int i = tam - 1; i >= tam - n; --i){
             Collections.swap(list, i , r.nextInt(i + 1));
         }
         return list.subList(tam - n, tam);
@@ -127,24 +131,44 @@ public class Generacion {
         return hijo;
     }
 
-    public vendedor iniciar(){
+    public void iniciar(){
         List<vendedor> poblacion = poblacionInicial(); //genera poblacion inicial
-        vendedor mejorSolucion = poblacion.get(0); //inicializamos la mejor solucion 
+        int mejorAptitud=Collections.min(poblacion).aptitud ;
+        System.out.println("Aptitud inicial"+mejorAptitud);
+        int contador=0;
+        mejorSolucion = poblacion.get(0); //inicializamos la mejor solucion 
         for(int i=0; i<itecionesMax; i++){
+            //imprimirGeneracion(poblacion);
+            String cad="-----------------------------";
+            cad+="\nGeneracion"+noGeneracion;
             List<vendedor> seleccionados = seleccion(poblacion); //realizamos el proceso de seleccion por ruleta
             poblacion = generarNuevaGeneracion(seleccionados);   //creamos una poblacion con los elementos seleccionados
             mejorSolucion = Collections.min(poblacion);     //busca el vendedor con la menor aptitud ya que buscamos la aptitud 0
-            if(mejorSolucion.getAptitud() < aptitudObjetivo){ //si la aptitud de la mejor solucion es menor entonces se detiene, se encontro la solucion
-                break;
+            
+            cad+="\nMejor Solucion De la generacion: "+ mejorSolucion;
+            noGeneracion++;
+            cad+="\n-----------------------------";
+            txt_generaciones.append(cad);
+            System.out.println("La aptitud de la mejor solucion "+mejorSolucion.getAptitud());
+           
+            if(mejorSolucion.getAptitud() <=mejorAptitud ){ //si la aptitud de la mejor solucion es menor entonces se detiene, se encontro la solucion
+                System.out.println("hola");
+                if(mejorSolucion.getAptitud()==mejorAptitud){
+                    contador++;
+                }
+                mejorAptitud=mejorSolucion.getAptitud();
+                if(contador==10){
+                    break;
+                }
+                
             }
+           
                 
         }
-        return mejorSolucion;   //devuelve al mejor vendedor
+        
+    }
+    public void run() {
+        iniciar();
     }
 
-    public void printGeneration(List<vendedor> generacion ){
-        for( vendedor genome : generacion){
-            System.out.println(genome);
-        }
-    }
 }

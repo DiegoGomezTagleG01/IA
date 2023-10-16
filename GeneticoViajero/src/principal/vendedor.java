@@ -1,7 +1,7 @@
 package principal;
 import java.util.*;
 
-public class vendedor implements Comparable {
+public class vendedor implements Comparable, Runnable {
     List<Integer> posibleSolucion; //genoma 
     int[][] tablaDistancias;
     int ciudadInicial;
@@ -65,11 +65,11 @@ public class vendedor implements Comparable {
     public String toString() {
         String cad="\nVendedor";
         cad+="\nRuta: ["+ ciudadInicial+"]";
-        posibleSolucion.add(ciudadInicial);
         for ( int solucion: posibleSolucion ) {
             cad+=" ";
             cad+=" ["+solucion+"]";
         }
+        cad+=" ["+ ciudadInicial+"]";
         cad+="\nDistancia: "+this.aptitud;
         return cad;
     }
@@ -85,5 +85,9 @@ public class vendedor implements Comparable {
             return -1;
         else
             return 0; //si la aptitud es igual a la posiblesolucion, devuelve 0
+    }
+ 
+    public void run() {
+        
     }
 }
