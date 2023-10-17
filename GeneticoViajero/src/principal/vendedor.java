@@ -1,7 +1,7 @@
 package principal;
 import java.util.*;
 
-public class vendedor implements Comparable, Runnable {
+public class vendedor implements Comparable {
     List<Integer> posibleSolucion; //genoma 
     int[][] tablaDistancias;
     int ciudadInicial;
@@ -37,7 +37,7 @@ public class vendedor implements Comparable, Runnable {
         return aptitud;
     }
     //genera una posible ruta
-    private List<Integer> ruta(){
+    public List<Integer> ruta(){
         List<Integer> resultado = new ArrayList<Integer>();
         for(int i=0; i<numeroCiudades; i++) {
             if(i!=ciudadInicial)
@@ -88,8 +88,5 @@ public class vendedor implements Comparable, Runnable {
         else
             return 0; //si la aptitud es igual a la posiblesolucion, devuelve 0
     }
- 
-    public void run() {
-        
-    }
+
 }
