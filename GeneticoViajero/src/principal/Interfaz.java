@@ -199,6 +199,7 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //genera ciudades aleatoreas
         int numCiudades;
        
         g=panelPrincipal.getGraphics();
@@ -226,6 +227,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void panelPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPrincipalMouseClicked
+        //pinta la ciudad en la posicion del raton
         g=panelPrincipal.getGraphics();
         repintar();
         int posx =panelPrincipal.getMousePosition().x;
@@ -245,6 +247,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_panelPrincipalMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    //genera lineas entre las ciudades
     int posx;
     int posy;
     
@@ -279,15 +282,17 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         txt_resultado.setText("");
         txt_generaciones.setText("");
-        int ciudadInicial;
         resultado.clear();
-       
+        //limpiamos las variables para el resultado
+        int ciudadInicial;
+        
+        //capturamos si existe un error
         try {
             ciudadInicial=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el numero de ciudad con el que quiera empezar"));
             if(ciudadInicial<ciudades.size() && ciudadInicial>=0 && tablaDistancias!=null){
                 
                 Generacion posiblesCaminos = new Generacion(ciudades.size(),tablaDistancias, ciudadInicial, 0, txt_generaciones);
-                //vendedor solucion = posiblesCaminos.iniciar();
+                //inicia el hilo
                 try {
                     Thread t = new Thread(posiblesCaminos);
                     t.start();
@@ -296,16 +301,21 @@ public class Interfaz extends javax.swing.JFrame {
                     System.out.println(e.toString());
                 }
                 vendedor solucion=posiblesCaminos.mejorSolucion;
+                //agrega la ciudad inicial al resultado
                 resultado.add(ciudadInicial);
+                //agrega cada elemento de la solucion
                 for(int i=0;i<solucion.posibleSolucion.size();i++){
                     resultado.add(solucion.posibleSolucion.get(i));
                 }
+                //agrega la ciudad final
                 resultado.add(ciudadInicial);
 
-                for ( int i: resultado ) {
+                /*for ( int i: resultado ) {
                    System.out.print(" ["+i+"]");
-                }
+                } */
+                //se pinta la solucion
                 pintarSolucion();
+                //escribe la solucion
                 txt_resultado.append("\n SOLUCION ENCONTRADA EN EL MEJOR \nINDIVIDUO DE LA GENERACION:"+solucion.noGeneracion );
                 txt_resultado.append("\n SE EMPIEZA EL VIAJE EN LA CIUDAD "+resultado.get(0));
                 for(int i=1;i<resultado.size();i++){
@@ -315,7 +325,7 @@ public class Interfaz extends javax.swing.JFrame {
                      }
                 }
                 txt_resultado.append("\n DISTANCIA TOTAL: "+solucion.aptitud);
-                System.out.println(solucion);
+                //System.out.println(solucion);
             }else{
                  JOptionPane.showMessageDialog(null, "Inserte el valor de una ciudad Valida");
             }
@@ -342,7 +352,6 @@ public class Interfaz extends javax.swing.JFrame {
     }
     public void repintar(){
         Color col= new Color((int)(Math.random()*255+0),(int)(Math.random()*255+0),(int)(Math.random()*255+0));
-        g.setColor(col);
         
         for(ciudad c: ciudades){
             g.setColor(c.col);
@@ -350,26 +359,24 @@ public class Interfaz extends javax.swing.JFrame {
             g.fillOval(c.posX, c.posY,15, 15);
         }
     }
+    //distancia euclidiana
     public int distancia(ciudad c1, ciudad c2){     
         int distanciaP= (int)Math.sqrt(Math.pow(c2.posX-c1.posX, 2)+Math.pow(c2.posY-c1.posY, 2));
         return distanciaP;            
     }
-    public void imprimirDistancia(){
-        for(int i=0;i<ciudades.size();i++){
-            System.out.println(ciudades.get(i).toString());
-        }
-    }
+    //genera la matriz de distancias 
     public void distancias(){
         txt_matriz.setText("");
         for(int i=0; i<tablaDistancias.length;i++){
             for(int j=0; j<tablaDistancias.length;j++){
                 txt_matriz.append("[ "+tablaDistancias[i][j]+" ]");
-                 System.out.print("["+tablaDistancias[i][j]+"]");
+                 
             }
             txt_matriz.append("\n");
-            System.out.println("");
+            
         }
     }
+    //pinta la solucion 
     public void pintarSolucion(){
         int posx=ciudades.get(resultado.get(0)).posX;
         int posy=ciudades.get(resultado.get(0)).posY;
@@ -384,7 +391,6 @@ public class Interfaz extends javax.swing.JFrame {
         }
         repintar();
         
-
     }
     /**
      * @param args the command line arguments

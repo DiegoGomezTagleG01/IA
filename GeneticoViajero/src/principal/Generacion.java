@@ -9,7 +9,7 @@ public class Generacion implements Runnable{
     int numeroCiudades; //numero de ciudades por recorrer
     int tam_reproduccion;   //tamanio de la cruza
     int itecionesMax;   //maximo de iteraciones para evitar sobrecarga 
-    float probabilidad_mutacion; //probabilidad de mutacion
+    double probabilidad_mutacion; //probabilidad de mutacion
     int[][] tablaDistancias;    //matriz de distancias
     int ciudadInicial;  //ciudad donde empieza el recorrido
     int aptitudObjetivo;    //aptitud que se aspira tener
@@ -29,10 +29,10 @@ public class Generacion implements Runnable{
         tam_generacion = 5000;
         tam_reproduccion = 200;
         itecionesMax = 500;
-        probabilidad_mutacion = 0.1f;
+        probabilidad_mutacion = 0.05;
         noGeneracion=1;
     }
-
+    //genera una poblacion inicial 
     public List<vendedor> poblacionInicial(){
         List<vendedor> poblacion = new ArrayList<>();
         for(int i=0; i<tam_generacion; i++){
@@ -44,21 +44,22 @@ public class Generacion implements Runnable{
     public List<vendedor> seleccion(List<vendedor> poblacion){
         List<vendedor> seleccionado = new ArrayList<>();
         for(int i=0; i<tam_reproduccion;     i++){
-            seleccionado.add(ruleta(poblacion));
+            seleccionado.add(ruleta(poblacion)); //agrega los elementos seleccionados por la ruleta
         }
 
         return seleccionado;
     }
 
     public vendedor ruleta(List<vendedor> poblacion){
+        //calcula la suma total de las aptitudes de todos los vendedores en la población, utilizando Streams 
         int totalAptitud = poblacion.stream().map(vendedor::getAptitud).mapToInt(Integer::intValue).sum();
         Random random = new Random();
         int valorSeleccionado = random.nextInt(totalAptitud);
-        float recValue = (float) 1/valorSeleccionado;
+        float valor = (float) 1/valorSeleccionado;
         float suma = 0;
         for(vendedor posibleSolucion : poblacion){
             suma += (float) 1/posibleSolucion.getAptitud();
-            if(suma>=recValue){
+            if(suma>=valor){
                 return posibleSolucion;
             }
         }
@@ -67,13 +68,18 @@ public class Generacion implements Runnable{
     }
     //metodo estatico que devuelve una lista que tiene n elementos de manera aleatorea
     public static <E> List<E> tomarElementos(List<E> list, int n) {
-        Random r = new Random();
+        // Verificar si la lista tiene al menos n elementos
         int tam = list.size();
-        if (tam < n) return null;
-
-        for (int i = tam - 1; i >= tam - n; --i){
-            Collections.swap(list, i , r.nextInt(i + 1));
+        if (tam < n) {
+            return null; // No se pueden intercambiar n elementos si la lista no tiene suficientes
         }
+        Random random = new Random(); 
+        // Iterar desde el final de la lista hasta el final - n
+        for (int i = tam - 1; i >= tam - n; --i) {
+            int randomIndex = random.nextInt(i + 1); // Generar un índice aleatorio entre 0 y i
+            Collections.swap(list, i, randomIndex); // Intercambiar el elemento en i con el elemento en randomIndex
+        }
+        // Devolver una sublista que contiene los elementos intercambiados
         return list.subList(tam - n, tam);
     }
 
@@ -89,28 +95,25 @@ public class Generacion implements Runnable{
     }
 
     public List<vendedor> generarNuevaGeneracion(List<vendedor> poblacion){
-        List<vendedor> generacion = new ArrayList<>();
-        int tam_generacionActual = 0;
-        while(tam_generacionActual < tam_generacion){
-            List<vendedor> padres = tomarElementos(poblacion,2);
-            List<vendedor> hijo = cruza(padres);
-            hijo.set(0, mutacion(hijo.get(0)));
+        List<vendedor> generacion = new ArrayList<>(); //nueva generacion 
+        int tam_generacionActual = 0;   //tamanio generacion nueva
+        while(tam_generacionActual < tam_generacion){ //hasta que la generacion no alcance la actual se hace el bucle
+            List<vendedor> padres = tomarElementos(poblacion,2); //se toman dos elementos, los padres 
+            List<vendedor> hijo = cruza(padres);    //se cruzan los padres
+            hijo.set(0, mutacion(hijo.get(0))); //ambos hijos pasan por la mutacion
             hijo.set(1, mutacion(hijo.get(1)));
             
-            generacion.addAll(hijo);
-            tam_generacionActual+=2;
-        }
-        for(int i=0; i<generacion.size();i++){
-            generacion.get(i).noGeneracion++;
+            generacion.addAll(hijo); //agregamos ambos hijos
+            tam_generacionActual+=2; // se suman los dos hijos al tamanio 
         }
         
-        return generacion;
+        return generacion; //regresa la nueva generacion en una lista 
     }
 
     public List<vendedor> cruza(List<vendedor> padres){
         //generamos el punto donde se cruzaran los padres
         Random random = new Random();
-        int puntoDeCruza = random.nextInt(tam_posibleSolucion);
+        int puntoDeCruza = random.nextInt(tam_posibleSolucion); //escoje un punto de cruza entre la posible solucion
         List<vendedor> hijo = new ArrayList<>();
 
         // Se copian los padres para no modificarlos
@@ -121,15 +124,15 @@ public class Generacion implements Runnable{
         for(int i = 0; i<puntoDeCruza; i++){
             int nuevaSolucion;
             nuevaSolucion = solucionPadre2.get(i);
-            Collections.swap(solucionPadre1,solucionPadre1.indexOf(nuevaSolucion),i);
+            Collections.swap(solucionPadre1,solucionPadre1.indexOf(nuevaSolucion),i); //realiza el intercambio de elementos sin repetir 
         }
         hijo.add(new vendedor(solucionPadre1,numeroCiudades,tablaDistancias,ciudadInicial));
-        solucionPadre1 = padres.get(0).getPosibleSolucion(); // reseting the edited parent
+        solucionPadre1 = padres.get(0).getPosibleSolucion(); // se reinicia el padre
 
         // cruza hijo 1
         for(int i = puntoDeCruza; i<tam_posibleSolucion; i++){
             int nuevaSolucion = solucionPadre1.get(i);
-            Collections.swap(solucionPadre2,solucionPadre2.indexOf(nuevaSolucion),i);
+            Collections.swap(solucionPadre2,solucionPadre2.indexOf(nuevaSolucion),i); //realiza el intercambio de elementos sin repetir 
         }
         hijo.add(new vendedor(solucionPadre2,numeroCiudades,tablaDistancias,ciudadInicial));
 
@@ -150,16 +153,17 @@ public class Generacion implements Runnable{
             poblacion = generarNuevaGeneracion(seleccionados);   //creamos una poblacion con los elementos seleccionados
             mejorSolucion = Collections.min(poblacion);     //busca el vendedor con la menor aptitud ya que buscamos la aptitud 0
             mejorSolucion.noGeneracion=noGeneracion;
-            mejoresSoluciones.add(mejorSolucion);  
+            mejoresSoluciones.add(mejorSolucion);  //cargamos las mejores soluciones 
             cad+="\nMejor Solucion De la generacion: "+ mejorSolucion;
             noGeneracion++;
             cad+="\n-----------------------------";
             txt_generaciones.append(cad);
         }
-        mejorSolucion = Collections.min(mejoresSoluciones);
+        mejorSolucion = Collections.min(mejoresSoluciones); //devolvemos la mejor solucion 
         
         
     }
+    //corre el Hilo 
     public void run() {
         iniciar();
     }
