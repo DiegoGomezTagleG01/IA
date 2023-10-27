@@ -26,7 +26,7 @@ public class Generacion implements Runnable{
         this.aptitudObjetivo = aptitudObjetivo;
         this.txt_generaciones=generaciones;
 
-        tam_generacion = 5000;
+        tam_generacion = 2000;
         tam_reproduccion = 200;
         itecionesMax = 500;
         probabilidad_mutacion = 0.05;
@@ -129,7 +129,7 @@ public class Generacion implements Runnable{
         hijo.add(new vendedor(solucionPadre1,numeroCiudades,tablaDistancias,ciudadInicial));
         solucionPadre1 = padres.get(0).getPosibleSolucion(); // se reinicia el padre
 
-        // cruza hijo 1
+        // cruza hijo 2
         for(int i = puntoDeCruza; i<tam_posibleSolucion; i++){
             int nuevaSolucion = solucionPadre1.get(i);
             Collections.swap(solucionPadre2,solucionPadre2.indexOf(nuevaSolucion),i); //realiza el intercambio de elementos sin repetir 

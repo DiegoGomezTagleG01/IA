@@ -10,8 +10,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 
-
-
 public class Interfaz extends javax.swing.JFrame {
     Graphics g;
     List<Integer> resultado = new ArrayList<Integer>();;
@@ -247,7 +245,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_panelPrincipalMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    //genera lineas entre las ciudades
+    //genera lineas entre las clases
     int posx;
     int posy;
     
