@@ -24,6 +24,7 @@ public class interfaz extends javax.swing.JFrame {
     public interfaz() {
         initComponents();
         GridLayout gridLayout = new GridLayout(filas, columnas);
+        
         panel_matrizE1.setLayout(gridLayout);
         asignar(panel_matrizE1);
         panel_matrizE2.setLayout(gridLayout);
@@ -33,9 +34,32 @@ public class interfaz extends javax.swing.JFrame {
         panel_matrizE4.setLayout(gridLayout);
         asignar(panel_matrizE4);
         
+        panel_matrizP1.setLayout(gridLayout);
+        asignar(panel_matrizP1);
+        panel_matrizP2.setLayout(gridLayout);
+        asignar(panel_matrizP2);
+        panel_matrizP3.setLayout(gridLayout);
+        asignar(panel_matrizP3);
+        panel_matrizP4.setLayout(gridLayout);
+        asignar(panel_matrizP4);
 
-       
+        panel_matrizMax1.setLayout(gridLayout);
+        panel_matrizMax1.setBackground(Color.WHITE);
+        panel_matrizMax2.setLayout(gridLayout);
+        panel_matrizMax2.setBackground(Color.WHITE);
+        panel_matrizMax3.setLayout(gridLayout);
+        panel_matrizMax3.setBackground(Color.WHITE);
+        panel_matrizMax4.setLayout(gridLayout);
+        panel_matrizMax4.setBackground(Color.WHITE);
         
+        panel_matrizMin1.setLayout(gridLayout);
+        panel_matrizMin1.setBackground(Color.WHITE);
+        panel_matrizMin2.setLayout(gridLayout);
+        panel_matrizMin2.setBackground(Color.WHITE);
+        panel_matrizMin3.setLayout(gridLayout);
+        panel_matrizMin3.setBackground(Color.WHITE);
+        panel_matrizMin4.setLayout(gridLayout);
+        panel_matrizMin4.setBackground(Color.WHITE);
     }//
 
     /**
@@ -53,6 +77,21 @@ public class interfaz extends javax.swing.JFrame {
         panel_matrizE4 = new javax.swing.JPanel();
         panel_matrizE3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        panel_matrizP2 = new javax.swing.JPanel();
+        panel_matrizP4 = new javax.swing.JPanel();
+        panel_matrizP3 = new javax.swing.JPanel();
+        panel_matrizP1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        panel_matrizMax1 = new javax.swing.JPanel();
+        panel_matrizMax2 = new javax.swing.JPanel();
+        panel_matrizMax4 = new javax.swing.JPanel();
+        panel_matrizMax3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        panel_matrizMin1 = new javax.swing.JPanel();
+        panel_matrizMin3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        panel_matrizMin4 = new javax.swing.JPanel();
+        panel_matrizMin2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,7 +108,7 @@ public class interfaz extends javax.swing.JFrame {
         panel_matrizE1.setLayout(panel_matrizE1Layout);
         panel_matrizE1Layout.setHorizontalGroup(
             panel_matrizE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panel_matrizE1Layout.setVerticalGroup(
             panel_matrizE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +121,7 @@ public class interfaz extends javax.swing.JFrame {
         panel_matrizE2.setLayout(panel_matrizE2Layout);
         panel_matrizE2Layout.setHorizontalGroup(
             panel_matrizE2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panel_matrizE2Layout.setVerticalGroup(
             panel_matrizE2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +134,7 @@ public class interfaz extends javax.swing.JFrame {
         panel_matrizE4.setLayout(panel_matrizE4Layout);
         panel_matrizE4Layout.setHorizontalGroup(
             panel_matrizE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 162, Short.MAX_VALUE)
         );
         panel_matrizE4Layout.setVerticalGroup(
             panel_matrizE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +147,7 @@ public class interfaz extends javax.swing.JFrame {
         panel_matrizE3.setLayout(panel_matrizE3Layout);
         panel_matrizE3Layout.setHorizontalGroup(
             panel_matrizE3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panel_matrizE3Layout.setVerticalGroup(
             panel_matrizE3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,6 +155,183 @@ public class interfaz extends javax.swing.JFrame {
         );
 
         jLabel1.setText("Entrenamiento");
+
+        panel_matrizP2.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout panel_matrizP2Layout = new javax.swing.GroupLayout(panel_matrizP2);
+        panel_matrizP2.setLayout(panel_matrizP2Layout);
+        panel_matrizP2Layout.setHorizontalGroup(
+            panel_matrizP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_matrizP2Layout.setVerticalGroup(
+            panel_matrizP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_matrizP4.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout panel_matrizP4Layout = new javax.swing.GroupLayout(panel_matrizP4);
+        panel_matrizP4.setLayout(panel_matrizP4Layout);
+        panel_matrizP4Layout.setHorizontalGroup(
+            panel_matrizP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 162, Short.MAX_VALUE)
+        );
+        panel_matrizP4Layout.setVerticalGroup(
+            panel_matrizP4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_matrizP3.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout panel_matrizP3Layout = new javax.swing.GroupLayout(panel_matrizP3);
+        panel_matrizP3.setLayout(panel_matrizP3Layout);
+        panel_matrizP3Layout.setHorizontalGroup(
+            panel_matrizP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_matrizP3Layout.setVerticalGroup(
+            panel_matrizP3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_matrizP1.setPreferredSize(new java.awt.Dimension(150, 150));
+        panel_matrizP1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panel_matrizP1MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_matrizP1Layout = new javax.swing.GroupLayout(panel_matrizP1);
+        panel_matrizP1.setLayout(panel_matrizP1Layout);
+        panel_matrizP1Layout.setHorizontalGroup(
+            panel_matrizP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_matrizP1Layout.setVerticalGroup(
+            panel_matrizP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        jLabel2.setText("PRUEBA");
+
+        panel_matrizMax1.setPreferredSize(new java.awt.Dimension(150, 150));
+        panel_matrizMax1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panel_matrizMax1MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_matrizMax1Layout = new javax.swing.GroupLayout(panel_matrizMax1);
+        panel_matrizMax1.setLayout(panel_matrizMax1Layout);
+        panel_matrizMax1Layout.setHorizontalGroup(
+            panel_matrizMax1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_matrizMax1Layout.setVerticalGroup(
+            panel_matrizMax1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_matrizMax2.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout panel_matrizMax2Layout = new javax.swing.GroupLayout(panel_matrizMax2);
+        panel_matrizMax2.setLayout(panel_matrizMax2Layout);
+        panel_matrizMax2Layout.setHorizontalGroup(
+            panel_matrizMax2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_matrizMax2Layout.setVerticalGroup(
+            panel_matrizMax2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_matrizMax4.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout panel_matrizMax4Layout = new javax.swing.GroupLayout(panel_matrizMax4);
+        panel_matrizMax4.setLayout(panel_matrizMax4Layout);
+        panel_matrizMax4Layout.setHorizontalGroup(
+            panel_matrizMax4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_matrizMax4Layout.setVerticalGroup(
+            panel_matrizMax4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_matrizMax3.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout panel_matrizMax3Layout = new javax.swing.GroupLayout(panel_matrizMax3);
+        panel_matrizMax3.setLayout(panel_matrizMax3Layout);
+        panel_matrizMax3Layout.setHorizontalGroup(
+            panel_matrizMax3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 162, Short.MAX_VALUE)
+        );
+        panel_matrizMax3Layout.setVerticalGroup(
+            panel_matrizMax3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        jLabel3.setText("RECUPERADO MAXIMOS");
+
+        panel_matrizMin1.setPreferredSize(new java.awt.Dimension(150, 150));
+        panel_matrizMin1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panel_matrizMin1MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_matrizMin1Layout = new javax.swing.GroupLayout(panel_matrizMin1);
+        panel_matrizMin1.setLayout(panel_matrizMin1Layout);
+        panel_matrizMin1Layout.setHorizontalGroup(
+            panel_matrizMin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_matrizMin1Layout.setVerticalGroup(
+            panel_matrizMin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_matrizMin3.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout panel_matrizMin3Layout = new javax.swing.GroupLayout(panel_matrizMin3);
+        panel_matrizMin3.setLayout(panel_matrizMin3Layout);
+        panel_matrizMin3Layout.setHorizontalGroup(
+            panel_matrizMin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_matrizMin3Layout.setVerticalGroup(
+            panel_matrizMin3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        jLabel4.setText("RECUPERADOS MINIMOS");
+
+        panel_matrizMin4.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout panel_matrizMin4Layout = new javax.swing.GroupLayout(panel_matrizMin4);
+        panel_matrizMin4.setLayout(panel_matrizMin4Layout);
+        panel_matrizMin4Layout.setHorizontalGroup(
+            panel_matrizMin4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        panel_matrizMin4Layout.setVerticalGroup(
+            panel_matrizMin4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_matrizMin2.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        javax.swing.GroupLayout panel_matrizMin2Layout = new javax.swing.GroupLayout(panel_matrizMin2);
+        panel_matrizMin2.setLayout(panel_matrizMin2Layout);
+        panel_matrizMin2Layout.setHorizontalGroup(
+            panel_matrizMin2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_matrizMin2Layout.setVerticalGroup(
+            panel_matrizMin2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,26 +342,80 @@ public class interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(panel_matrizE1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel_matrizE2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel_matrizE3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel_matrizE4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(816, Short.MAX_VALUE))
+                        .addComponent(panel_matrizE1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                        .addComponent(panel_matrizE2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                        .addComponent(panel_matrizE3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                        .addComponent(panel_matrizE4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(260, 260, 260)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel_matrizP1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(panel_matrizP2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(panel_matrizP3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_matrizP4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel_matrizMax1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(panel_matrizMax2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(panel_matrizMax3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_matrizMax4, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel_matrizMin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_matrizMin2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_matrizMin3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_matrizMin4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10)
-                .addComponent(panel_matrizE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel_matrizE2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panel_matrizE3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel_matrizE4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(10, 10, 10)
+                        .addComponent(panel_matrizMin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panel_matrizMin2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panel_matrizMin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panel_matrizMin4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(panel_matrizE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel_matrizE2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(panel_matrizE3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel_matrizE4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(panel_matrizP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel_matrizP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(panel_matrizP3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel_matrizP4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(panel_matrizMax1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel_matrizMax2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(panel_matrizMax3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel_matrizMax4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,6 +437,18 @@ public class interfaz extends javax.swing.JFrame {
     private void panel_matrizE1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_matrizE1MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_panel_matrizE1MousePressed
+
+    private void panel_matrizP1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_matrizP1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panel_matrizP1MousePressed
+
+    private void panel_matrizMax1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_matrizMax1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panel_matrizMax1MousePressed
+
+    private void panel_matrizMin1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_matrizMin1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panel_matrizMin1MousePressed
     public void asignar(JPanel asignado){
         JLabel[][] pixels = new JLabel[filas][columnas];
         for (int i = 0; i < filas; i++) {
@@ -232,11 +514,26 @@ public class interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panel_matrizE1;
     private javax.swing.JPanel panel_matrizE2;
     private javax.swing.JPanel panel_matrizE3;
     private javax.swing.JPanel panel_matrizE4;
+    private javax.swing.JPanel panel_matrizMax1;
+    private javax.swing.JPanel panel_matrizMax2;
+    private javax.swing.JPanel panel_matrizMax3;
+    private javax.swing.JPanel panel_matrizMax4;
+    private javax.swing.JPanel panel_matrizMin1;
+    private javax.swing.JPanel panel_matrizMin2;
+    private javax.swing.JPanel panel_matrizMin3;
+    private javax.swing.JPanel panel_matrizMin4;
+    private javax.swing.JPanel panel_matrizP1;
+    private javax.swing.JPanel panel_matrizP2;
+    private javax.swing.JPanel panel_matrizP3;
+    private javax.swing.JPanel panel_matrizP4;
     // End of variables declaration//GEN-END:variables
 }
 class MatrizPanel extends JPanel {
