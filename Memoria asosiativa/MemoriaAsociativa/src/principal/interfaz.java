@@ -21,6 +21,11 @@ public class interfaz extends javax.swing.JFrame {
 
     int columnas=10;
     int filas=10;
+    
+    private int[][] estadoPaneles;
+
+
+    
     public interfaz() {
         initComponents();
         GridLayout gridLayout = new GridLayout(filas, columnas);
@@ -60,6 +65,13 @@ public class interfaz extends javax.swing.JFrame {
         panel_matrizMin3.setBackground(Color.WHITE);
         panel_matrizMin4.setLayout(gridLayout);
         panel_matrizMin4.setBackground(Color.WHITE);
+        estadoPaneles = new int[filas][columnas];
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                estadoPaneles[i][j] = 0;
+            }
+        }
+
     }//
 
     /**
