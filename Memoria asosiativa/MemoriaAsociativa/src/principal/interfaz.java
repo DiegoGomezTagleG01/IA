@@ -19,61 +19,166 @@ import javax.swing.JPanel;
  */
 public class interfaz extends javax.swing.JFrame {
 
-    int columnas=10;
-    int filas=10;
+    
     
     private int[][] estadoPaneles;
-
-
+    //matrices por cada patron
+    int[][] matriz1 = {
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0}
+        };
+    int[][] matriz2 = {
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0}
+        };
+    int[][] matriz3 = {
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0}
+        };
+    int[][] matriz4 = {
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0}
+        };
+    //matrices de entrada
+        int[][] matrizE1 = {
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0}
+        };
+    int[][] matrizE2 = {
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0}
+        };
+    int[][] matrizE3 = {
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0}
+        };
+    int[][] matrizE4 = {
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0},
+            {0, 0, 0, 0 ,0}
+        };
+     //memoria maxima y minima de las 4 matrices
+    int memoriaMax[][];
+    int memoriaMin[][];
     
+    int recuperacion1Max[][];
+    int recuperacion1Min[][];
+    //matriz que recupera la entrada 2
+    int recuperacion2Max[][];
+    int recuperacion2Min[][]; 
+    //matriz que recupera la entrada 3
+    int recuperacion3Max[][];
+    int recuperacion3Min[][];
+    //matriz que recupera la entrada 4
+    int recuperacion4Max[][];
+    int recuperacion4Min[][];
+    
+    //matrices donde se guarda el aprendizaje de cada patron
+    int[][]aprendizaje1;
+    int[][]aprendizaje2;
+    int[][]aprendizaje3;
+    int[][]aprendizaje4;
+    
+    int columnas=5;
+    int filas=8;
     public interfaz() {
         initComponents();
-        GridLayout gridLayout = new GridLayout(filas, columnas);
-        
-        panel_matrizE1.setLayout(gridLayout);
-        asignar(panel_matrizE1);
-        panel_matrizE2.setLayout(gridLayout);
-        asignar(panel_matrizE2);
-        panel_matrizE3.setLayout(gridLayout);
-        asignar(panel_matrizE3);
-        panel_matrizE4.setLayout(gridLayout);
-        asignar(panel_matrizE4);
-        
-        panel_matrizP1.setLayout(gridLayout);
-        asignar(panel_matrizP1);
-        panel_matrizP2.setLayout(gridLayout);
-        asignar(panel_matrizP2);
-        panel_matrizP3.setLayout(gridLayout);
-        asignar(panel_matrizP3);
-        panel_matrizP4.setLayout(gridLayout);
-        asignar(panel_matrizP4);
+        reinicio();
 
-        panel_matrizMax1.setLayout(gridLayout);
-        panel_matrizMax1.setBackground(Color.WHITE);
-        panel_matrizMax2.setLayout(gridLayout);
-        panel_matrizMax2.setBackground(Color.WHITE);
-        panel_matrizMax3.setLayout(gridLayout);
-        panel_matrizMax3.setBackground(Color.WHITE);
-        panel_matrizMax4.setLayout(gridLayout);
-        panel_matrizMax4.setBackground(Color.WHITE);
-        
-        panel_matrizMin1.setLayout(gridLayout);
-        panel_matrizMin1.setBackground(Color.WHITE);
-        panel_matrizMin2.setLayout(gridLayout);
-        panel_matrizMin2.setBackground(Color.WHITE);
-        panel_matrizMin3.setLayout(gridLayout);
-        panel_matrizMin3.setBackground(Color.WHITE);
-        panel_matrizMin4.setLayout(gridLayout);
-        panel_matrizMin4.setBackground(Color.WHITE);
-        estadoPaneles = new int[filas][columnas];
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                estadoPaneles[i][j] = 0;
-            }
-        }
 
     }//
-
+    public void reinicio(){
+        GridLayout gridLayout = new GridLayout(filas, columnas);
+        //SE ASIGNA UN PANEL Y UNA MATRIZ
+        panel_matrizE1.setLayout(gridLayout);
+        asignar(panel_matrizE1, matriz1);
+        panel_matrizE2.setLayout(gridLayout);
+        asignar(panel_matrizE2,matriz2);
+        panel_matrizE3.setLayout(gridLayout);
+        asignar(panel_matrizE3,matriz3);
+        panel_matrizE4.setLayout(gridLayout);
+        asignar(panel_matrizE4, matriz4);
+        //SE ASIGNA UN PANEL Y UNA MATRIZ DE ENTRADA
+        panel_matrizP1.setLayout(gridLayout);
+        asignar(panel_matrizP1,matrizE1);
+        panel_matrizP2.setLayout(gridLayout);
+        asignar(panel_matrizP2,matrizE2);
+        panel_matrizP3.setLayout(gridLayout);
+        asignar(panel_matrizP3,matrizE3);
+        panel_matrizP4.setLayout(gridLayout);
+        asignar(panel_matrizP4,matrizE4);
+        
+        panel_matrizMax1.setLayout(gridLayout);
+        asignar_2(panel_matrizMax1,recuperacion1Max);
+        
+        panel_matrizMax2.setLayout(gridLayout);
+        asignar_2(panel_matrizMax2,recuperacion2Max);
+        
+        panel_matrizMax3.setLayout(gridLayout);
+        asignar_2(panel_matrizMax3,recuperacion3Max);
+        
+        panel_matrizMax4.setLayout(gridLayout);
+        asignar_2(panel_matrizMax4,recuperacion4Max);
+        
+        panel_matrizMin1.setLayout(gridLayout);
+        asignar_2(panel_matrizMin1,recuperacion1Min);
+        
+        panel_matrizMin2.setLayout(gridLayout);
+        asignar_2(panel_matrizMin2,recuperacion2Min);
+        
+        panel_matrizMin3.setLayout(gridLayout);
+        asignar_2(panel_matrizMin3,recuperacion3Min);
+        
+        panel_matrizMin4.setLayout(gridLayout);
+        asignar_2(panel_matrizMin4,recuperacion4Min);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,6 +209,9 @@ public class interfaz extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         panel_matrizMin4 = new javax.swing.JPanel();
         panel_matrizMin2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -345,6 +453,27 @@ public class interfaz extends javax.swing.JFrame {
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
+        jButton1.setText("Aprendizaje");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Recuperacion");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Reinicio");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -379,7 +508,13 @@ public class interfaz extends javax.swing.JFrame {
                     .addComponent(panel_matrizMin3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_matrizMin4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,7 +561,13 @@ public class interfaz extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(panel_matrizMax3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panel_matrizMax4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(panel_matrizMax4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
@@ -461,7 +602,68 @@ public class interfaz extends javax.swing.JFrame {
     private void panel_matrizMin1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_matrizMin1MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_panel_matrizMin1MousePressed
-    public void asignar(JPanel asignado){
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //patron1 bidimensional
+        int[]patron1=convertirBidimensional(matriz1);
+        int[][]patron1t;
+
+        //patron2 bidimensional
+        int[] patron2=convertirBidimensional(matriz2);;
+        int[][]patron2t;
+        //patron3 bidimensional
+        int[] patron3=convertirBidimensional(matriz3);;
+        int[][]patron3t;
+        //patron4 bidimensional 
+        int[] patron4=convertirBidimensional(matriz4);;
+        int[][]patron4t;
+        patron1t=transpuesta(patron1);
+        patron2t=transpuesta(patron2);
+        patron3t=transpuesta(patron3);
+        patron4t=transpuesta(patron4);
+        
+        aprendizaje1=fase_aprendizaje(patron1, patron1t);
+        aprendizaje2=fase_aprendizaje(patron2, patron2t);
+        aprendizaje3=fase_aprendizaje(patron3, patron3t);
+        aprendizaje4=fase_aprendizaje(patron4, patron4t);
+        
+        memoriaMax=maximos(aprendizaje1, aprendizaje2, aprendizaje3,aprendizaje4);
+        memoriaMin=minimos(aprendizaje1, aprendizaje2, aprendizaje3,aprendizaje4);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int[] matrizEntrada1= convertirBidimensional(matrizE1);
+        int[] matrizEntrada2= convertirBidimensional(matrizE2);
+        int[] matrizEntrada3= convertirBidimensional(matrizE3);
+        int[] matrizEntrada4= convertirBidimensional(matrizE4);
+        
+        System.out.println("patron 1");
+        recuperacion1Max=convertirABidimensional(recuperacionMax(matrizEntrada1, memoriaMax),8,5);
+        recuperacion1Min=convertirABidimensional(recuperacionMin(matrizEntrada1, memoriaMin),8,5);
+        configurarColores(panel_matrizMin1, recuperacion1Min);
+        configurarColores(panel_matrizMax1, recuperacion1Max);
+        System.out.println("patron 2");
+        recuperacion2Max=convertirABidimensional(recuperacionMax(matrizEntrada2, memoriaMax),8,5);
+        recuperacion2Min=convertirABidimensional(recuperacionMin(matrizEntrada2, memoriaMin),8,5);
+        configurarColores(panel_matrizMin2, recuperacion2Min);
+        configurarColores(panel_matrizMax2, recuperacion2Max);
+        System.out.println("patron 3");
+        recuperacion3Max=convertirABidimensional(recuperacionMax(matrizEntrada3, memoriaMax),8,5);
+        recuperacion3Min=convertirABidimensional(recuperacionMin(matrizEntrada3, memoriaMin),8,5);
+        configurarColores(panel_matrizMin3, recuperacion3Min);
+        configurarColores(panel_matrizMax3, recuperacion3Max);
+        System.out.println("patron 4");
+        recuperacion4Max=convertirABidimensional(recuperacionMax(matrizEntrada4, memoriaMax),8,5);
+        recuperacion4Min=convertirABidimensional(recuperacionMin(matrizEntrada4, memoriaMin),8,5);
+        configurarColores(panel_matrizMin4, recuperacion4Min);
+        configurarColores(panel_matrizMax4, recuperacion4Max);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        reinicio();
+    }//GEN-LAST:event_jButton3ActionPerformed
+    public void asignar(JPanel asignado, int[][] matriz){
         JLabel[][] pixels = new JLabel[filas][columnas];
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
@@ -477,8 +679,12 @@ public class interfaz extends javax.swing.JFrame {
                     public void mouseClicked(MouseEvent e) {
                         if(pixels[row][col].getBackground().toString().equals(Color.WHITE.toString())){
                             pixels[row][col].setBackground(Color.BLACK);
+                            matriz[row][col]=1;
+                            //imprimirMatriz(matriz);
                         }else{
                             pixels[row][col].setBackground(Color.WHITE);
+                            matriz[row][col]=0;
+                            //imprimirMatriz(matriz);
                         }
                       
                         
@@ -488,6 +694,279 @@ public class interfaz extends javax.swing.JFrame {
                 asignado.add(pixels[i][j]);
             }
         }
+    }
+      public static void configurarColores(JPanel panel, int[][] arreglo) {
+        for (int fila = 0; fila < arreglo.length; fila++) {
+            for (int columna = 0; columna < arreglo[0].length; columna++) {
+                int valor = arreglo[fila][columna];
+                Color color = (valor == 1) ? Color.BLACK : Color.WHITE;
+
+                // Obtener el componente en la posición (fila, columna)
+                JLabel componente = (JLabel) panel.getComponent(fila * arreglo[0].length + columna);
+
+                // Configurar el color de fondo del componente
+                componente.setBackground(color);
+            }
+        }
+    }
+
+
+     public void asignar_2(JPanel asignado, int[][] matriz){
+        JLabel[][] pixels = new JLabel[filas][columnas];
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                pixels[i][j] = new JLabel();
+                pixels[i][j].setOpaque(true);
+                pixels[i][j].setBackground(Color.WHITE);
+
+                // Agregamos un MouseListener para cambiar el color al mantener presionado el botón del mouse
+                final int row = i;
+                final int col = j;
+                pixels[i][j].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if(matriz[row][col]==1){
+                            pixels[row][col].setBackground(Color.BLACK);
+                            
+                            //imprimirMatriz(matriz);
+                        }else if(matriz[row][col]==0){
+                            pixels[row][col].setBackground(Color.WHITE);
+                            matriz[row][col]=0;
+                            
+                        }
+                      
+                        
+                    }
+                });
+
+                asignado.add(pixels[i][j]);
+            }
+        }
+    }
+    public void imprimirMatriz(int[][]matriz){
+        for(int i=0;i< matriz.length;i++){
+            for(int j=0;j<matriz.length;j++){
+                System.out.print("["+matriz[i][j]+"]");
+            }
+            System.out.println("");
+        }
+    }
+     public static int[][] transpuesta(int [] matriz){
+        //System.out.println(matriz.length);
+        int[][] matrizt= new int[matriz.length][1];
+        for(int i=0;i<matriz.length;i++){
+            matrizt[i][0]=matriz[i];
+            //System.out.println("["+matrizt[i][0]+"]");
+        }
+        return matrizt;
+    }
+    
+    public static int alfa(int x, int y){
+        int regreso = 0;
+        if(x==0 && y==0){
+            regreso=1;
+        }else if(x==0 && y==1){
+            regreso=0;
+        }else if(x==1 && y==0){
+            regreso=2;
+        }else if(x==1 && y==1){
+            regreso=1;
+        }
+        return regreso;
+    }
+    
+    public static int beta(int x, int y){
+        int regreso = 0;
+        if(x==0 && y==0){
+            regreso=0;
+        }else if(x==0 && y==1){
+            regreso=0;
+        }else if(x==1 && y==0){
+            regreso=0;
+        }else if(x==1 && y==1){
+            regreso=1;
+        }
+        else if(x==2 && y==0){
+            regreso=1;
+        }else if(x==2 && y==1){
+            regreso=1;
+        }
+        return regreso;
+    }
+    
+    public int[][] fase_aprendizaje(int[]matriz, int matrizt[][]){
+        int [][] matrizAprendizaje= new int[matriz.length][matrizt.length];
+        for(int i=0;i<matrizt.length;i++){
+            for(int j=0;j<matriz.length;j++){
+                matrizAprendizaje[i][j]= alfa(matrizt[i][0],matriz[j]);
+                //System.out.print("["+matrizAprendizaje[i][j]+"]");
+                
+            }
+        //System.out.println("");
+        }
+         //System.out.println("");
+         return matrizAprendizaje;
+    }
+    
+    public int [][] maximos(int[][] patron1, int[][] patron2,int[][] patron3,int[][] patron4){
+        int[][]max= new int[patron1.length][patron1.length];
+        System.out.println("Maximos: ");
+        int mayor;
+            for(int i=0;i<patron1.length;i++){
+                for(int j=0;j<patron1.length;j++){
+                    if (patron1[i][j] >= patron2[i][j]&& patron1[i][j] >= patron3[i][j] && patron1[i][j] >= patron4[i][j] ) {
+                        mayor = patron1[i][j];
+                    } else if (patron2[i][j] >= patron1[i][j] && patron2[i][j] >= patron3[i][j] && patron2[i][j] >= patron4[i][j] ) {
+                        mayor = patron2[i][j];
+                    } else if (patron3[i][j] >= patron1[i][j] && patron3[i][j] >= patron2[i][j] && patron3[i][j] >= patron4[i][j]) {
+                        mayor = patron3[i][j];
+                    }else {
+                        mayor = patron4[i][j];
+                    }
+                    max[i][j]=mayor;
+                    
+                    System.out.print("["+max[i][j]+"]");
+
+                }
+            System.out.println("");
+        }
+        return max;
+    }
+    
+    public int [][] minimos(int[][] patron1, int[][] patron2,int[][] patron3,int[][] patron4){
+        int[][]min= new int[patron1.length][patron1.length];
+        System.out.println("Minimos: ");
+        int menor;
+            for(int i=0;i<patron1.length;i++){
+                for(int j=0;j<patron1.length;j++){
+                    if (patron1[i][j] <= patron2[i][j]&& patron1[i][j] <= patron3[i][j] && patron1[i][j] <= patron4[i][j]) {
+                        menor = patron1[i][j];
+                    } else if (patron2[i][j] <= patron1[i][j] && patron2[i][j] <= patron3[i][j] && patron2[i][j] <= patron4[i][j]) {
+                        menor = patron2[i][j];
+                    } else if (patron3[i][j] <= patron1[i][j] && patron3[i][j] <= patron2[i][j] && patron3[i][j] <= patron4[i][j]) {
+                        menor = patron3[i][j];
+                    } else {
+                        menor = patron4[i][j];
+                    }
+                    min[i][j]=menor;
+                    
+                    System.out.print("["+min[i][j]+"]");
+
+                }
+            System.out.println("");
+        }
+        return min;
+    }
+    
+    public int [] recuperacionMax(int[] entrada,int memoriaMax[][]){
+        int[] recuperacion= new int[entrada.length];
+        int[][] temporal= new int[memoriaMax.length][memoriaMax.length];
+         System.out.println("Recuperacion Maximos: ");
+            for(int i=0;i<entrada.length;i++){
+                for(int j=0;j<entrada.length;j++){
+                     temporal[i][j]= beta(memoriaMax[i][j],entrada[j]);
+                    //System.out.print("["+temporal[i][j]+"]");
+                }
+                //System.out.println("");
+            }
+            recuperacion=encontrarMenoresPorFila(temporal);
+            //System.out.println("Recuperacion final: ");
+            for(int i=0;i< recuperacion.length;i++){
+                //System.out.print("["+recuperacion[i]+"]");
+            }
+            //System.out.println("");
+            
+        return recuperacion;
+    }
+    
+     public int [] recuperacionMin(int[] entrada,int memoriaMin[][]){
+        int[] recuperacion= new int[entrada.length];
+        int[][] temporal= new int[memoriaMin.length][memoriaMin.length];
+         System.out.println("Recuperacion Minimos: ");
+            for(int i=0;i<entrada.length;i++){
+                for(int j=0;j<entrada.length;j++){
+                     temporal[i][j]= beta(memoriaMin[i][j],entrada[j]);
+                    //System.out.print("["+temporal[i][j]+"]");
+                }
+                //System.out.println("");
+            }
+            recuperacion=encontrarMayoresPorFila(temporal);
+            //System.out.println("Recuperacion final: ");
+            for(int i=0;i< recuperacion.length;i++){
+                //System.out.print("["+recuperacion[i]+"]");
+            }
+        return recuperacion;
+    }
+     
+     public static int[] encontrarMayoresPorFila(int[][] matriz) {
+        int filas = matriz.length;
+        int[] mayoresPorFila = new int[filas];
+
+        for (int i = 0; i < filas; i++) {
+            int mayor = matriz[i][0];
+            for (int j = 1; j < matriz[i].length; j++) {
+                if (matriz[i][j] > mayor) {
+                    mayor = matriz[i][j];
+                }
+            }
+            mayoresPorFila[i] = mayor;
+        }
+
+        return mayoresPorFila;
+    }
+     
+    public static int[] encontrarMenoresPorFila(int[][] matriz) {
+        int filas = matriz.length;
+        int[] menoresPorFila = new int[filas];
+
+        for (int i = 0; i < filas; i++) {
+            int menor = matriz[i][0];
+            for (int j = 1; j < matriz[i].length; j++) {
+                if (matriz[i][j] < menor) {
+                    menor = matriz[i][j];
+                }
+            }
+            menoresPorFila[i] = menor;
+        }
+
+        return menoresPorFila;
+    }
+    
+    public static int[] convertirBidimensional(int[][] matriz) {
+        int filas = matriz.length;
+        int columnas = matriz[0].length; // Suponemos que todas las filas tienen la misma cantidad de columnas
+
+        int[] arregloUnidimensional = new int[filas * columnas];
+        int index = 0;
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                arregloUnidimensional[index] = matriz[i][j];
+                index++;
+            }
+        }
+
+        return arregloUnidimensional;
+    }
+    
+    public static int[][] convertirABidimensional(int[] arregloUnidimensional, int filas, int columnas) {
+        if (arregloUnidimensional.length != filas * columnas) {
+            throw new IllegalArgumentException("El tamaño del arreglo unidimensional no coincide con el número de filas y columnas especificadas.");
+        }
+
+        int[][] matrizBidimensional = new int[filas][columnas];
+        int index = 0;
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                matrizBidimensional[i][j] = arregloUnidimensional[index];
+                index++;
+                System.out.print("["+matrizBidimensional[i][j]+"]");
+            }
+            System.out.println("");
+        }
+
+        return matrizBidimensional;
     }
     /**
      * @param args the command line arguments
@@ -525,6 +1004,9 @@ public class interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -509,7 +509,7 @@ class TableroPanel extends JPanel {
                         System.out.println("Celda presionada en fila: " + x + ", columna: " + y);
                         boton.setBackground(boton.getBackground().equals(Color.BLACK) ? Color.WHITE : Color.BLACK);
 
-                        alfa();
+                        //alfa();
                     }
                 });
                 add(celdas[i][j]);
