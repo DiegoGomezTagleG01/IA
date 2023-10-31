@@ -604,6 +604,10 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_panel_matrizMin1MousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        btn_1();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void btn_1(){
         //patron1 bidimensional
         int[]patron1=convertirBidimensional(matriz1);
         int[][]patron1t;
@@ -629,10 +633,13 @@ public class interfaz extends javax.swing.JFrame {
         
         memoriaMax=maximos(aprendizaje1, aprendizaje2, aprendizaje3,aprendizaje4);
         memoriaMin=minimos(aprendizaje1, aprendizaje2, aprendizaje3,aprendizaje4);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
+            
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        btn_2();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void btn_2(){
         int[] matrizEntrada1= convertirBidimensional(matrizE1);
         int[] matrizEntrada2= convertirBidimensional(matrizE2);
         int[] matrizEntrada3= convertirBidimensional(matrizE3);
@@ -658,8 +665,7 @@ public class interfaz extends javax.swing.JFrame {
         recuperacion4Min=convertirABidimensional(recuperacionMin(matrizEntrada4, memoriaMin),8,5);
         configurarColores(panel_matrizMin4, recuperacion4Min);
         configurarColores(panel_matrizMax4, recuperacion4Max);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         reinicio();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -681,12 +687,14 @@ public class interfaz extends javax.swing.JFrame {
                             pixels[row][col].setBackground(Color.BLACK);
                             matriz[row][col]=1;
                             //imprimirMatriz(matriz);
+                            btn_1();
+                            btn_2();
                         }else{
                             pixels[row][col].setBackground(Color.WHITE);
                             matriz[row][col]=0;
                             //imprimirMatriz(matriz);
                         }
-                      
+                        
                         
                     }
                 });
